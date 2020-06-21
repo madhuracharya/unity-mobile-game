@@ -58,9 +58,10 @@ public class ingredient : MonoBehaviour
 				img.sprite= gameObject.GetComponent<SpriteRenderer>().sprite;
 				img.color = new Color(img.color.r, img.color.g, img.color.b, 0.5f);
 
-				break;
+				return;
 			}
 		}
+		Destroy(gameObject);
 	}
 
 	public void OnTriggerEnter2D(Collider2D other)
