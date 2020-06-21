@@ -56,7 +56,7 @@ public class ingredient : MonoBehaviour
 
 				Image img= ingGhost.gameObject.GetComponent<Image>();
 				img.sprite= gameObject.GetComponent<SpriteRenderer>().sprite;
-				img.color = new Color(img.color.r, img.color.g, img.color.b, 0.5f);
+				img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
 
 				return;
 			}
