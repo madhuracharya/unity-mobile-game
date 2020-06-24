@@ -8,7 +8,7 @@ public class spawnPatternVertical : MonoBehaviour
 
 	private float minDelay= 1f;
 	private float maxDelay= 3f;
-	private float timeLeft = 30.0f;
+	private float timeLeft = 10.0f;
 	private bool stopSpawning= false;
 
 	// Start is called before the first frame update

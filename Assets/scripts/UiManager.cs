@@ -53,7 +53,7 @@ public class UiManager : MonoBehaviour
 
 		foreach(Transform slt in slotParent.transform)
 		{
-			if(slt.transform.GetChild(2).gameObject.activeSelf == false)
+			if(slt.GetChild(2).gameObject.activeSelf == false)
 			{
 				uncheckedSlots++;
 			}
@@ -93,6 +93,38 @@ public class UiManager : MonoBehaviour
 			resetRecipeBoard();
 		}
 		
+	}
+
+	public bool checkIngredientInRecipe(ingredient ing)
+	{
+		if(ing != null)
+		{
+			foreach (Transform slot in slotParent.transform)
+			{
+				if(ing.GetComponent<Alias>().alias == slot.GetComponent<Alias>().alias)
+				{
+					return slot.GetChild(2).gameObject.activeSelf;
+				}
+			}
+		}
+		return false;
+	}
+
+	public List<ingredient> getActiveIngredients()
+	{
+		List<ingredient> ingList= new List<ingredient>();
+		foreach (Transform slot in slotParent.transform)
+		{
+			if(slot.GetChild(2).gameObject.activeSelf == false)
+			{
+				int indx= System.Array.FindIndex(ingredientList,  ig => ig.GetComponent<Alias>().alias == slot.GetComponent<Alias>().alias);
+				if(indx > -1)
+				{
+					ingList.Add(ingredientList[indx]);
+				}
+			}
+		}
+		return ingList;
 	}
 }
 
