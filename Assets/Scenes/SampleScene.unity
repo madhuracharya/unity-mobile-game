@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -246,6 +247,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa32319ef52f4468befb488211ed42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -421,11 +434,12 @@ MonoBehaviour:
     type: 3}
   ingredientList:
   - {fileID: 2663395995113632349, guid: 2308c4cf430314ce88de95f6e4601818, type: 3}
-  - {fileID: 3955055688498294539, guid: 3b50575c7efde4424a5f914552af451b, type: 3}
+  - {fileID: 4903290819011546595, guid: 3b50575c7efde4424a5f914552af451b, type: 3}
   - {fileID: 6092282720374784336, guid: a4ea94a661f904a5a97b5fff36a36193, type: 3}
   - {fileID: 4934660061602201625, guid: d7f21c1f959ef4f739f1acb9591e2f16, type: 3}
   recipeList: []
   currentRecipe: {fileID: 0}
+  currentRecipeIndex: 0
 --- !u!1 &1075184935
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class spawnManager : MonoBehaviour
 
 	IEnumerator spawn()
 	{
-		Debug.Log("Spawning new pattern!");
 		yield return new WaitForSeconds(1f);
 		int rand= Random.Range(0,  spawnPatternList.Count * 3);
 		rand= rand % spawnPatternList.Count;
@@ -27,8 +26,8 @@ public class spawnManager : MonoBehaviour
 	{
 		recipeList= UiManager.recipeList;
 		List<ingredient> actList= UiManager.getActiveIngredients();
-
-		if(recipeList.Count > 0 && actList.Count > 0)
+	
+		if(actList.Count > 0)
 		{
 			StartCoroutine(spawn());
 		}

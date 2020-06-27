@@ -235,12 +235,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 3202806791465083860, guid: fed9e90684d164d7c960796c03715ba5,
     type: 3}
-  sliceBack: {fileID: 6815360948555017729, guid: 2c9dea7f1296d431c9543ef35e2b2c23,
+  sliceBack: {fileID: 3110762929419236001, guid: 7160c5268bc8b49f9b488a658ece57b9,
     type: 3}
-  sliceFront: {fileID: 3038890961619826432, guid: 4e079b331e8c5482b87ace80b91e5cb0,
+  sliceFront: {fileID: 8007187676812801545, guid: 5cbb54c7aab8f4f91923ea655931a659,
     type: 3}
-  ingredientGhost: {fileID: 6391999904331923968, guid: ed86e5c5824b941f2b7dcea9a812945b,
-    type: 3}
+  sliceBackImage: {fileID: 21300000, guid: 7ed3e2bc306ae42b082f8efe3c6c5e02, type: 3}
+  sliceFrontImage: {fileID: 21300000, guid: 1ec5a76d78d6c419289de4942d6022e1, type: 3}
 --- !u!70 &7937822756647613549
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

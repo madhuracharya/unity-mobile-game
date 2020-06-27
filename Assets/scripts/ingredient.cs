@@ -12,14 +12,18 @@ public class ingredient : MonoBehaviour
 	[SerializeField] private GameObject explosion;
 	[SerializeField] private GameObject sliceBack;
 	[SerializeField] private GameObject sliceFront;
-	[SerializeField] private GameObject ingredientGhost;
+	[SerializeField] private Sprite sliceBackImage;
+	[SerializeField] private Sprite sliceFrontImage;
+
+
+	private eventSystem eventSystem;
 
 	void Start()
 	{
 		rb= GetComponent<Rigidbody2D>();
 		canvas= GameObject.Find("Canvas");
-		//rb.AddForce(transform.up * speed, ForceMode2D.Impulse);
 		revSpeed= Random.Range(-50.0f, 50f);
+		eventSystem= Camera.main.GetComponent<eventSystem>();
 	}
 
 	void Update()
@@ -38,26 +42,44 @@ public class ingredient : MonoBehaviour
 		return IngredientColors;
 	}
 
-	public void renderGhost()
+	public void renderSlices()
 	{
 		GameObject slotParent = GameObject.Find("slotParent");
 		foreach (Transform child in slotParent.transform)
 		{
 			if(child.GetComponent<Alias>().alias == gameObject.GetComponent<Alias>().alias && child.GetChild(2).gameObject.activeSelf == false)
 			{
-				GameObject ingGhost = Instantiate(ingredientGhost) as GameObject;
-				ingGhost.transform.SetParent(canvas.transform, false);
+				GameObject sl1= Instantiate(sliceBack) as GameObject;	
+				GameObject sl2= Instantiate(sliceFront) as GameObject;
+				sl1.transform.SetParent(canvas.transform, false);
+				sl2.transform.SetParent(canvas.transform, false);
+
 				Vector3 pos= Camera.main.WorldToScreenPoint(gameObject.transform.position);
-				ingGhost.transform.position = pos;
-				ingredientGhost ingGhostScript= ingGhost.GetComponent<ingredientGhost>();
-				ingGhostScript.alias= gameObject.GetComponent<Alias>().alias;
-				ingGhostScript.lookAt= child;
-				ingGhostScript.ingredient= gameObject;
+				sl1.transform.position= pos;
+				sl2.transform.position= pos;
 
-				Image img= ingGhost.gameObject.GetComponent<Image>();
-				img.sprite= gameObject.GetComponent<SpriteRenderer>().sprite;
-				img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
+				ingredientSlices is1= sl1.GetComponent<ingredientSlices>();
+				ingredientSlices is2= sl2.GetComponent<ingredientSlices>();
 
+				if(is1 != null)
+				{
+					is1.ingredient= gameObject;
+					is1.lookAt= child;
+					is1.alias= "sliceBack";
+					Image img= is1.GetComponent<Image>();
+					img.sprite= sliceFrontImage;
+					//img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
+				}
+
+				if(is2 != null)
+				{
+					is2.ingredient= gameObject;
+					is2.lookAt= child;
+					is2.alias= "sliceFront";
+					Image img= is2.GetComponent<Image>();
+					img.sprite= sliceBackImage;
+					//img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
+				}
 				return;
 			}
 		}
@@ -66,7 +88,6 @@ public class ingredient : MonoBehaviour
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-
 		void breakIngredient()
 		{
 			GameObject exp= Instantiate(explosion, transform.position, transform.rotation);		
@@ -77,36 +98,28 @@ public class ingredient : MonoBehaviour
 				exMain.startColor= new ParticleSystem.MinMaxGradient(col[0], col[1]);
 			}
 
-			if(sliceBack && sliceFront)
-			{
-				GameObject sl1= Instantiate(sliceBack, transform.position + new Vector3(-0.5f, 0, 0), transform.rotation);	
-				GameObject sl2= Instantiate(sliceFront, transform.position + new Vector3(0.5f, 0, 0), transform.rotation);
-				Rigidbody2D srb1= sl1.GetComponent<Rigidbody2D>();
-				Rigidbody2D srb2= sl2.GetComponent<Rigidbody2D>();
-
-				/*srb1.AddForce(-other.transform.right * 5, ForceMode2D.Impulse);
-				srb2.AddForce(other.transform.right * 5, ForceMode2D.Impulse);*/
-				srb1.AddForce(-transform.right * 5, ForceMode2D.Impulse);
-				srb2.AddForce(transform.right * 5, ForceMode2D.Impulse);
-				if(sl1) Destroy(sl1, 5);
-				if(sl2) Destroy(sl2, 5);
-			}
-
-			renderGhost();
+			renderSlices();
 
 			Destroy(exp, 2);
 			gameObject.SetActive(false);
-			GameObject parent= transform.parent.gameObject;
-			if(parent!= null && parent.tag == "spawnPoint")
+			if(transform.parent != null)
 			{
-				transform.parent = null;
-				Destroy(parent);
+				GameObject parent= transform.parent.gameObject;
+				if(parent!= null && parent.tag == "spawnPoint")
+				{
+					transform.parent = null;
+					Destroy(parent);
+				}
 			}
 		}
 
 		if(other.tag == "blade")
 		{
 			breakIngredient();
+			if(eventSystem.onIngredientTrigger != null)
+			{
+				eventSystem.callOnIngredientTrigger();
+			}
 		}
 	}
 }

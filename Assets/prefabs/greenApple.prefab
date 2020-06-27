@@ -137,12 +137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 3202806791465083860, guid: fed9e90684d164d7c960796c03715ba5,
     type: 3}
-  sliceBack: {fileID: 6989532936361484959, guid: b69923b09b0834b5294853b196a43dff,
+  sliceBack: {fileID: 3110762929419236001, guid: 7160c5268bc8b49f9b488a658ece57b9,
     type: 3}
-  sliceFront: {fileID: 6130689654803633880, guid: 6d0ddeaa622394202af304194fda3da6,
+  sliceFront: {fileID: 8007187676812801545, guid: 5cbb54c7aab8f4f91923ea655931a659,
     type: 3}
-  ingredientGhost: {fileID: 6391999904331923968, guid: ed86e5c5824b941f2b7dcea9a812945b,
-    type: 3}
+  sliceBackImage: {fileID: 21300000, guid: fdd354cf251964bc5a769f9c7bd154c0, type: 3}
+  sliceFrontImage: {fileID: 21300000, guid: 21bce41afdbd946e7ab571cf463ff8d5, type: 3}
 --- !u!114 &977404767506588598
 MonoBehaviour:
   m_ObjectHideFlags: 0

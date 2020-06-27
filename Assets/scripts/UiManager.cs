@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
 
 	public List<recipe> recipeList= new List<recipe>();
 	public recipe currentRecipe;
+	public int currentRecipeIndex= 0;
 
 	// Start is called before the first frame update
 	void Start()
@@ -19,8 +20,8 @@ public class UiManager : MonoBehaviour
 		{
 			recipeList.Add(new recipe(ingredientList));
 		}
-		currentRecipe= recipeList[0];
-		recipeList.RemoveAt(0);
+		currentRecipe= recipeList[currentRecipeIndex];
+		//recipeList.RemoveAt(0);
 		resetRecipeBoard();
 	}
 
@@ -86,10 +87,11 @@ public class UiManager : MonoBehaviour
 			}
 		}
 		
-		if(uncheckedSlots <= 0 && recipeList.Count > 0)
+		if(uncheckedSlots <= 0 && currentRecipeIndex < recipeList.Count)
 		{
-			currentRecipe= recipeList[0];
-			recipeList.RemoveAt(0);  
+			currentRecipeIndex++;
+			currentRecipe= recipeList[currentRecipeIndex];
+			//recipeList.RemoveAt(0);  
 			resetRecipeBoard();
 		}
 		
