@@ -7,13 +7,14 @@ public class ingredientSlices : MonoBehaviour
 	public string alias;
 	public Transform lookAt;
 	private UiManager ui;
-	public GameObject ingredient;
+	public string ingredientName;
 	private float duration= .4f;
 
 	void Start()
 	{
 		ui= GameObject.Find("Canvas").GetComponent<UiManager>();
-		if(lookAt != null && alias != null)
+
+		if(lookAt != null)
 		{
 			if(alias == "sliceFront")
 			{
@@ -23,20 +24,41 @@ public class ingredientSlices : MonoBehaviour
 			{
 				LeanTween.moveY(gameObject, lookAt.position.y, duration).setEase(LeanTweenType.easeInQuad);
 				LeanTween.moveX(gameObject, lookAt.position.x, duration).setEase(LeanTweenType.easeInBack);
-				LeanTween.scale(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().localScale* 0.5f, duration).setDelay(duration).setOnComplete(Cleanup);
+				LeanTween.scale(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().localScale* 0f, duration / 2).setDelay(duration / 2).setOnComplete(Cleanup);
 			}
 		}
+		else
+		{
+			if(alias == "sliceFront")
+			{
+				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration) .setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
+				LeanTween.moveY(gameObject, transform.position.y + 25, duration).setEase(LeanTweenType.easeInQuad);
+				LeanTween.moveX(gameObject, transform.position.x - 40, duration).setEase(LeanTweenType.easeInBack);
+			}
+			else
+			{
+				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration) .setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
+				LeanTween.moveY(gameObject, transform.position.y - 25, duration).setEase(LeanTweenType.easeInQuad);
+				LeanTween.moveX(gameObject, transform.position.x + 40, duration).setEase(LeanTweenType.easeInBack);
+			}
+		}
+
+		if(gameObject != null) Destroy(gameObject, 2);
 	}
 
 	private void harakiri()
 	{
-		Destroy(gameObject);
+		if(gameObject != null) Destroy(gameObject);
+		//if(ingredient != null) Destroy(ingredient);
 	}
 
 	private void Cleanup()
 	{
-		ui.updateRecipeBoard(ingredient);
-		Destroy(gameObject);
-		Destroy(ingredient);
+		if(gameObject != null) Destroy(gameObject);
+		if(ingredientName != null) 
+		{
+			ui.addIngredientNameToQuee(ingredientName);
+			//Destroy(ingredient);
+		}
 	}
 }

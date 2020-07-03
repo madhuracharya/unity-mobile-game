@@ -16,7 +16,8 @@ public class patternManager : MonoBehaviour
 		spawner= GameObject.Find("spawnManager").GetComponent<spawnManager>();
 		slotParent = GameObject.Find("slotParent");
 		name= gameObject.name.Replace("(Clone)", "");
-		Camera.main.GetComponent<eventSystem>().onIngredientTrigger+= checkValidIngredients;
+		//Camera.main.GetComponent<eventSystem>().onIngredientTrigger+= validateIngredients;
+		Camera.main.GetComponent<eventSystem>().onRecipeBoardUpdate+= validateIngredients;
 	}
 
 	void Update()
@@ -27,12 +28,9 @@ public class patternManager : MonoBehaviour
 		}
 	}
 
-	void checkValidIngredients()
+	private void validateIngredients()
 	{
-		if(despawning == true)
-		{
-			return;
-		}
+		if(despawning == true) return;
 		else
 		{
 			switch (name)
@@ -58,10 +56,7 @@ public class patternManager : MonoBehaviour
 						}
 					}
 
-					if(activeSlots <= 0)
-					{
-						next();
-					}
+					if(activeSlots <= 0) next();
 					return;
 				}
 			}
@@ -70,15 +65,15 @@ public class patternManager : MonoBehaviour
 
 	private void next()
 	{
+		IEnumerator despawn()
+		{	
+			yield return new WaitForSeconds(1f);
+			spawner.spawnNewPattern();
+			Destroy(gameObject);
+		}
+
 		Debug.Log("Spawning next!");
 		despawning= true;
 		StartCoroutine(despawn());
-	}
-
-	IEnumerator despawn()
-	{	
-		yield return new WaitForSeconds(1f);
-		spawner.spawnNewPattern();
-		Destroy(gameObject);
 	}
 }

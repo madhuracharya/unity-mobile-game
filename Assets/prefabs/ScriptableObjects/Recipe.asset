@@ -17,7 +17,7 @@ MonoBehaviour:
       type: 3}
     quantity: 3
     ingredientName: greenApple
-  - ingredient: {fileID: 3955055688498294536, guid: 3b50575c7efde4424a5f914552af451b,
+  - ingredient: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
       type: 3}
     quantity: 2
     ingredientName: orange
@@ -25,4 +25,3 @@ MonoBehaviour:
       type: 3}
     quantity: 3
     ingredientName: pineapple
-  ingList: []

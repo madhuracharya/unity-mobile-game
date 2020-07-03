@@ -5,13 +5,47 @@ using UnityEngine;
 public class spawnPoint : MonoBehaviour
 {
 	[SerializeField] private IngredientList ingList;
+	private UiManager uiManager;
+	public bool spawnFromRecipe= false;
 
 	void Start()
 	{
-		ingredient[] ingredientList= ingList.ingredientList;
-		int rand= Random.Range(0,  ingredientList.Length * 3);
-		rand= rand % ingredientList.Length;
-		ingredient ing= Instantiate(ingredientList[rand], transform.position, transform.rotation);
-		ing.gameObject.transform.parent= transform;
+		uiManager= GameObject.Find("Canvas").GetComponent<UiManager>();
+
+		if(spawnFromRecipe == true)
+		{
+			List<recipeItem> therecipe= uiManager.currentRecipe.theRecipe;
+			int rand= Random.Range(0,  therecipe.Count * 3);
+			rand= rand % therecipe.Count;
+			GameObject ing= Instantiate(therecipe[rand].ingredient, transform.position, transform.rotation);
+			ing.transform.parent= transform;
+			ing.GetComponent<Alias>().inRecipe= true;
+		}
+		else
+		{
+			ingredient[] ingredientList= ingList.ingredientList;
+			int rand= Random.Range(0,  ingredientList.Length * 3);
+			rand= rand % ingredientList.Length;
+			ingredient ing= Instantiate(ingredientList[rand], transform.position, transform.rotation);
+			ing.gameObject.transform.parent= transform;
+
+			if(uiManager.currentRecipe != null)
+			{
+				Alias alias= ing.GetComponent<Alias>();
+
+				foreach(recipeItem itm in uiManager.currentRecipe.theRecipe)
+				{
+					if(alias.alias == itm.ingredientName)
+					{
+						alias.inRecipe= true;
+						break;
+					}
+					else
+					{
+						alias.inRecipe= false;
+					}
+				}
+			}
+		}
 	}
 }

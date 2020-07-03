@@ -16,14 +16,14 @@ public class ingredient : MonoBehaviour
 	[SerializeField] private Sprite sliceFrontImage;
 
 
-	private eventSystem eventSystem;
+	//private eventSystem eventSystem;
 
 	void Start()
 	{
 		rb= GetComponent<Rigidbody2D>();
 		canvas= GameObject.Find("Canvas");
 		revSpeed= Random.Range(-50.0f, 50f);
-		eventSystem= Camera.main.GetComponent<eventSystem>();
+		//eventSystem= Camera.main.GetComponent<eventSystem>();
 	}
 
 	void Update()
@@ -45,25 +45,27 @@ public class ingredient : MonoBehaviour
 	public void renderSlices()
 	{
 		GameObject slotParent = GameObject.Find("slotParent");
+		GameObject animationCanvas= GameObject.Find("AnimationCanvas");
+
+		GameObject sl1= Instantiate(sliceBack) as GameObject;	
+		GameObject sl2= Instantiate(sliceFront) as GameObject;
+		sl1.transform.SetParent(animationCanvas.transform, false);
+		sl2.transform.SetParent(animationCanvas.transform, false);
+
+		Vector3 pos= Camera.main.WorldToScreenPoint(gameObject.transform.position);
+		sl1.transform.position= pos;
+		sl2.transform.position= pos;
+
+		ingredientSlices is1= sl1.GetComponent<ingredientSlices>();
+		ingredientSlices is2= sl2.GetComponent<ingredientSlices>();
+
 		foreach (Transform child in slotParent.transform)
 		{
 			if(child.GetComponent<Alias>().alias == gameObject.GetComponent<Alias>().alias && child.GetChild(2).gameObject.activeSelf == false)
 			{
-				GameObject sl1= Instantiate(sliceBack) as GameObject;	
-				GameObject sl2= Instantiate(sliceFront) as GameObject;
-				sl1.transform.SetParent(canvas.transform, false);
-				sl2.transform.SetParent(canvas.transform, false);
-
-				Vector3 pos= Camera.main.WorldToScreenPoint(gameObject.transform.position);
-				sl1.transform.position= pos;
-				sl2.transform.position= pos;
-
-				ingredientSlices is1= sl1.GetComponent<ingredientSlices>();
-				ingredientSlices is2= sl2.GetComponent<ingredientSlices>();
-
 				if(is1 != null)
 				{
-					is1.ingredient= gameObject;
+					is1.ingredientName= gameObject.GetComponent<Alias>().alias;
 					is1.lookAt= child;
 					is1.alias= "sliceBack";
 					Image img= is1.GetComponent<Image>();
@@ -73,16 +75,36 @@ public class ingredient : MonoBehaviour
 
 				if(is2 != null)
 				{
-					is2.ingredient= gameObject;
+					is2.ingredientName= gameObject.GetComponent<Alias>().alias;
 					is2.lookAt= child;
 					is2.alias= "sliceFront";
 					Image img= is2.GetComponent<Image>();
 					img.sprite= sliceBackImage;
 					//img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
 				}
+				Destroy(gameObject);
 				return;
 			}
 		}
+
+		if(is1 != null)
+		{
+			is1.ingredientName= gameObject.GetComponent<Alias>().alias;
+			is1.alias= "sliceBack";
+			Image img= is1.GetComponent<Image>();
+			img.sprite= sliceFrontImage;
+			//img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
+		}
+
+		if(is2 != null)
+		{
+			is2.ingredientName= gameObject.GetComponent<Alias>().alias;
+			is2.alias= "sliceFront";
+			Image img= is2.GetComponent<Image>();
+			img.sprite= sliceBackImage;
+			//img.color = new Color(img.color.r, img.color.g, img.color.b, 0.7f);
+		}
+
 		Destroy(gameObject);
 	}
 
@@ -116,10 +138,6 @@ public class ingredient : MonoBehaviour
 		if(other.tag == "blade")
 		{
 			breakIngredient();
-			if(eventSystem.onIngredientTrigger != null)
-			{
-				eventSystem.callOnIngredientTrigger();
-			}
 		}
 	}
 }

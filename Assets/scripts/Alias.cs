@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Alias : MonoBehaviour
 {
-	public string alias= "None";
+	public string alias;
+	public bool inRecipe;
 }
