@@ -41,6 +41,7 @@ public class ingredientSlices : MonoBehaviour
 				LeanTween.moveY(gameObject, transform.position.y - 25, duration).setEase(LeanTweenType.easeInQuad);
 				LeanTween.moveX(gameObject, transform.position.x + 40, duration).setEase(LeanTweenType.easeInBack);
 			}
+			ui.incrementInvalidIngredientCount();
 		}
 
 		if(gameObject != null) Destroy(gameObject, 2);

@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
 	public int currentRecipeIndex= 0;
 	private eventSystem eventSystem;
 	private bool recipeReady= false;
+	public int invalidIngredientCount= 0;
 
 	// Start is called before the first frame update
 	void Start()
@@ -124,7 +125,14 @@ public class UiManager : MonoBehaviour
 							}
 							else
 							{
-								Debug.Log("Ingredient list empty!");
+								GameObject rc= GameObject.Find("recipeBoard");
+								LeanTween.moveX(rc, rc.transform.position.x - 100, .5f).setOnComplete(() => {
+									if(eventSystem.onRecipeListEmpty != null)
+									{
+										eventSystem.callOnRecipeListEmpty();
+									}
+									showScoreBoard();
+								});
 							}
 						}
 
@@ -141,6 +149,47 @@ public class UiManager : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void showScoreBoard()
+	{
+		GameObject scoreBoard= GameObject.Find("scoreBoard");
+		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
+		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
+
+		scoreUI.SetActive(true);
+
+		TMPro.TextMeshProUGUI acc= GameObject.Find("recipeAccuracy").GetComponent<TMPro.TextMeshProUGUI>();
+		if(acc != null)
+		{
+			backdrop.SetActive(true);
+			int totalIngredients= 0;
+			foreach(recipe rep in recipeList)
+			{
+				foreach(recipeItem itm in rep.theRecipe)
+				{
+					totalIngredients+= itm.quantity;
+				}
+			}
+
+			if(invalidIngredientCount == 0)
+			{
+				acc.text= "100%";
+			}
+			else
+			{
+				acc.text= 100 / (totalIngredients / invalidIngredientCount) + "%";
+			}
+
+			LeanTween.moveY(scoreUI.GetComponent<RectTransform>(), 0f, 1f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
+				Debug.Log(totalIngredients);
+			});
+		}
+	}	
+
+	public void incrementInvalidIngredientCount()
+	{
+		invalidIngredientCount+= 1;
 	}
 
 	public bool checkIngredientInRecipe(ingredient ing)

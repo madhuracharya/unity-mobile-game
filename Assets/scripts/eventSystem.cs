@@ -9,6 +9,7 @@ public class eventSystem : MonoBehaviour
 	public eventDeligate onRecipeBoardUpdate;
 	public eventDeligate onRecipeChange;
 	public eventDeligate onRecipeReady;
+	public eventDeligate onRecipeListEmpty;
 
 
 	public void callOnIngredientTrigger()
@@ -58,6 +59,19 @@ public class eventSystem : MonoBehaviour
 			if(onRecipeReady != null)
 			{
 				onRecipeReady();
+			}
+		}
+		StartCoroutine(trigger());
+	}
+
+	public void callOnRecipeListEmpty()
+	{
+		IEnumerator trigger()
+		{	
+			yield return new WaitForSeconds(0);
+			if(onRecipeListEmpty != null)
+			{
+				onRecipeListEmpty();
 			}
 		}
 		StartCoroutine(trigger());
