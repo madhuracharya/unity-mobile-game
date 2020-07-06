@@ -15,7 +15,7 @@ MonoBehaviour:
   theRecipe:
   - ingredient: {fileID: 2663395995113632350, guid: 2308c4cf430314ce88de95f6e4601818,
       type: 3}
-    quantity: 3
+    quantity: 2
     ingredientName: greenApple
   - ingredient: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
       type: 3}

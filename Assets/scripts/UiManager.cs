@@ -11,21 +11,15 @@ public class UiManager : MonoBehaviour
 	[SerializeField] private recipe customRecipe;
 
 	public List<recipe> recipeList= new List<recipe>();
-	public recipe currentRecipe;
+	public recipe currentRecipe; 
 	public int currentRecipeIndex= 0;
 	private eventSystem eventSystem;
 	private bool recipeReady= false;
-	private List<string> ingredientNameQuee= new List<string>();
-	private bool queeTrigger= false;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		eventSystem= Camera.main.GetComponent<eventSystem>();
-		Camera.main.GetComponent<eventSystem>().onRecipeBoardUpdate+= () => {
-			if (ingredientNameQuee.Count > 0) updateRecipeBoard(ingredientNameQuee[0]);
-			else queeTrigger= false;
-		};
 
 		if(customRecipe != null)
 		{
@@ -41,16 +35,6 @@ public class UiManager : MonoBehaviour
 		
 		currentRecipe= recipeList[currentRecipeIndex];
 		resetRecipeBoard();
-	}
-
-	public void addIngredientNameToQuee(string ingName)
-	{
-		ingredientNameQuee.Add(ingName);
-		if(queeTrigger == false)
-		{
-			queeTrigger= true;
-			updateRecipeBoard(ingredientNameQuee[0]);
-		}
 	}
 
 	private void resetRecipeBoard()
@@ -113,43 +97,46 @@ public class UiManager : MonoBehaviour
 					bool isParsable = int.TryParse(quantity.text.Replace("x", ""), out numb);
 					if(isParsable)
 					{
+						slot.transform.GetChild(1).gameObject.SetActive(false);
+
 						RectTransform rect= slot.transform.GetChild(0).GetComponent<RectTransform>();
 						Vector3 initialScale= rect.localScale;
-						slot.transform.GetChild(1).gameObject.SetActive(false);
-						LeanTween.scale(rect, initialScale * 0.7f, .1f).setEase(LeanTweenType.easeOutBounce).setOnComplete(() => {
-							LeanTween.scale(rect, initialScale, .1f).setEase(LeanTweenType.easeOutBounce).setOnComplete(changeQuantity);
-						});
-						
-						void changeQuantity()
-						{
-							if((numb - 1) <= 0)
-							{
-								//Destroy(slot.gameObject);
-								slot.transform.GetChild(2).gameObject.SetActive(true);
-								//slot.transform.GetChild(1).gameObject.SetActive(false);
-								uncheckedSlots+= -1;
-							}
-							else
-							{
-								quantity.text= "x" + (numb - 1).ToString();
-								slot.transform.GetChild(1).gameObject.SetActive(true);
-							}
 
-							if(uncheckedSlots <= 0 && currentRecipeIndex < recipeList.Count)
+						if((numb - 1) <= 0)
+						{
+							slot.transform.GetChild(2).gameObject.SetActive(true);
+							uncheckedSlots+= -1;
+						}
+						else
+						{
+							quantity.text= "x" + (numb - 1).ToString();
+							slot.transform.GetChild(1).gameObject.SetActive(true);
+						}
+
+						if(uncheckedSlots <= 0)
+						{
+							if(currentRecipeIndex < recipeList.Count - 1)
 							{
 								currentRecipeIndex++;
 								currentRecipe= recipeList[currentRecipeIndex];
 								//recipeList.RemoveAt(0);  
 								resetRecipeBoard();
 							}
-
-							if(eventSystem.onRecipeBoardUpdate != null)
+							else
 							{
-								eventSystem.callOnRecipeBoardUpdate();
+								Debug.Log("Ingredient list empty!");
 							}
-							ingredientNameQuee.RemoveAt(0);
-							return;
 						}
+
+						LeanTween.scale(rect, initialScale * 0.85f, .05f).setEase(LeanTweenType.easeOutBounce).setOnComplete(() => {
+							LeanTween.scale(rect, initialScale, .05f).setEase(LeanTweenType.easeOutBounce).setOnComplete(() => {
+								if(eventSystem.onRecipeBoardUpdate != null)
+								{
+									eventSystem.callOnRecipeBoardUpdate();
+								}
+								return;
+							});
+						});
 					}
 				}
 			}

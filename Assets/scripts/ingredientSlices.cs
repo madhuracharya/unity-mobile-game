@@ -57,7 +57,7 @@ public class ingredientSlices : MonoBehaviour
 		if(gameObject != null) Destroy(gameObject);
 		if(ingredientName != null) 
 		{
-			ui.addIngredientNameToQuee(ingredientName);
+			ui.updateRecipeBoard(ingredientName);
 			//Destroy(ingredient);
 		}
 	}
