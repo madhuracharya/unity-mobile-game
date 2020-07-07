@@ -16,6 +16,7 @@ public class UiManager : MonoBehaviour
 	private eventSystem eventSystem;
 	private bool recipeReady= false;
 	public int invalidIngredientCount= 0;
+	public int totalIngredients= 0;
 
 	// Start is called before the first frame update
 	void Start()
@@ -163,26 +164,37 @@ public class UiManager : MonoBehaviour
 		if(acc != null)
 		{
 			backdrop.SetActive(true);
-			int totalIngredients= 0;
-			foreach(recipe rep in recipeList)
-			{
-				foreach(recipeItem itm in rep.theRecipe)
+			LeanTween.moveY(scoreUI.GetComponent<RectTransform>(), 0f, .5f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
+				float par= 0;
+
+				if(invalidIngredientCount == 0 || totalIngredients == 0)
 				{
-					totalIngredients+= itm.quantity;
+					acc.text= "100%";
 				}
-			}
+				else
+				{
+					par= (((float)totalIngredients - (float)invalidIngredientCount) / totalIngredients) * 100;
+					par= Mathf.Floor(par * 10) / 10;
+				}
 
-			if(invalidIngredientCount == 0)
-			{
-				acc.text= "100%";
-			}
-			else
-			{
-				acc.text= 100 / (totalIngredients / invalidIngredientCount) + "%";
-			}
-
-			LeanTween.moveY(scoreUI.GetComponent<RectTransform>(), 0f, 1f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
-				Debug.Log(totalIngredients);
+				IEnumerator scoreTicker()
+				{	
+					for(int i= 0; i < Mathf.Floor(par); i++)
+					{
+						acc.text= i + "%";
+						yield return new WaitForSeconds(0.01f);
+					}
+					acc.text= par + "%";
+					
+					if(par > 25) scoreUI.transform.GetChild(2).gameObject.SetActive(true);
+					yield return new WaitForSeconds(0.5f);
+					if(par > 50) scoreUI.transform.GetChild(3).gameObject.SetActive(true);
+					yield return new WaitForSeconds(0.5f);
+					if(par > 75) scoreUI.transform.GetChild(4).gameObject.SetActive(true);
+					yield return new WaitForSeconds(0.5f);
+					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
+				}
+				StartCoroutine(scoreTicker());
 			});
 		}
 	}	
@@ -190,6 +202,11 @@ public class UiManager : MonoBehaviour
 	public void incrementInvalidIngredientCount()
 	{
 		invalidIngredientCount+= 1;
+	}
+
+	public void incrementTotalIngredients()
+	{
+		totalIngredients+= 1;
 	}
 
 	public bool checkIngredientInRecipe(ingredient ing)

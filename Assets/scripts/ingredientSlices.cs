@@ -43,6 +43,7 @@ public class ingredientSlices : MonoBehaviour
 			}
 			ui.incrementInvalidIngredientCount();
 		}
+		ui.incrementTotalIngredients();
 
 		if(gameObject != null) Destroy(gameObject, 2);
 	}
