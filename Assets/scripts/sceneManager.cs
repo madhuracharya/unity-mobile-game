@@ -14,6 +14,7 @@ public class sceneManager : MonoBehaviour
 	public void nextScene()
 	{
 		Debug.Log("Loading next scene!");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 	public void restartScene()
 	{

@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-	[SerializeField] private GameObject slotParent;
+	private GameObject slotParent;
 	[SerializeField] private GameObject ingredientSlot;
 	[SerializeField] private ingredient[] ingredientList;
-	[SerializeField] private recipe customRecipe;
+
+	private GameObject recipeBoard;
+	private TMPro.TextMeshProUGUI recipeCount;
 
 	public List<recipe> recipeList;
 	public recipe currentRecipe; 
@@ -22,12 +24,11 @@ public class UiManager : MonoBehaviour
 	void Start()
 	{
 		eventSystem= Camera.main.GetComponent<eventSystem>();
+		slotParent= GameObject.Find("slotParent");
+		recipeBoard= GameObject.Find("recipeBoard");
+		recipeCount= GameObject.Find("recipeCount").GetComponent<TMPro.TextMeshProUGUI>();
 
-		if(customRecipe != null)
-		{
-			recipeList.Add(customRecipe);
-		}
-		else if(recipeList.Count == 0)
+		if(recipeList.Count == 0)
 		{
 			recipeList= new List<recipe>();
 			for(int i= 0; i < 5; i++)
@@ -42,10 +43,9 @@ public class UiManager : MonoBehaviour
 
 	private void resetRecipeBoard()
 	{
-		GameObject rect= GameObject.Find("recipeBoard");
-		Vector2 rectPos= rect.transform.position;
+		Vector2 rectPos= recipeBoard.transform.position;
 
-		LeanTween.moveX(rect, rectPos.x - 100, .5f).setOnComplete(() => {
+		LeanTween.moveX(recipeBoard, rectPos.x - 100, .5f).setOnComplete(() => {
 			foreach(Transform slot in slotParent.transform)
 			{
 				Destroy(slot.gameObject);
@@ -64,7 +64,8 @@ public class UiManager : MonoBehaviour
 
 				slot.GetComponent<Alias>().alias= rec.ingredientName;
 			}
-			LeanTween.moveX(rect, rectPos.x, .5f).setOnComplete(() => {
+			recipeCount.text= currentRecipeIndex + 1 + " / " + recipeList.Count;
+			LeanTween.moveX(recipeBoard, rectPos.x, .5f).setOnComplete(() => {
 				if(eventSystem.onRecipeChange != null) eventSystem.callOnRecipeChange();
 				if(eventSystem.onRecipeReady != null && recipeReady == false)
 				{
@@ -127,8 +128,7 @@ public class UiManager : MonoBehaviour
 							}
 							else
 							{
-								GameObject rc= GameObject.Find("recipeBoard");
-								LeanTween.moveX(rc, rc.transform.position.x - 100, .5f).setOnComplete(() => {
+								LeanTween.moveX(recipeBoard, recipeBoard.transform.position.x - 100, .5f).setOnComplete(() => {
 									if(eventSystem.onRecipeListEmpty != null)
 									{
 										eventSystem.callOnRecipeListEmpty();
@@ -171,7 +171,7 @@ public class UiManager : MonoBehaviour
 
 				if(invalidIngredientCount == 0 || totalIngredients == 0)
 				{
-					acc.text= "100%";
+					par= 100;
 				}
 				else
 				{
@@ -184,7 +184,7 @@ public class UiManager : MonoBehaviour
 					for(int i= 0; i < Mathf.Floor(par); i++)
 					{
 						acc.text= i + "%";
-						yield return new WaitForSeconds(0.01f);
+						yield return new WaitForSeconds(0.005f);
 					}
 					acc.text= par + "%";
 					
