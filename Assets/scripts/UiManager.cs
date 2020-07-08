@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
 	[SerializeField] private ingredient[] ingredientList;
 	[SerializeField] private recipe customRecipe;
 
-	public List<recipe> recipeList= new List<recipe>();
+	public List<recipe> recipeList;
 	public recipe currentRecipe; 
 	public int currentRecipeIndex= 0;
 	private eventSystem eventSystem;
@@ -27,8 +27,9 @@ public class UiManager : MonoBehaviour
 		{
 			recipeList.Add(customRecipe);
 		}
-		else
+		else if(recipeList.Count == 0)
 		{
+			recipeList= new List<recipe>();
 			for(int i= 0; i < 5; i++)
 			{
 				recipeList.Add(new recipe(ingredientList));
@@ -154,6 +155,7 @@ public class UiManager : MonoBehaviour
 
 	public void showScoreBoard()
 	{
+		GameObject.Find("avatar").SetActive(false);
 		GameObject scoreBoard= GameObject.Find("scoreBoard");
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
@@ -190,7 +192,7 @@ public class UiManager : MonoBehaviour
 					yield return new WaitForSeconds(0.5f);
 					if(par > 50) scoreUI.transform.GetChild(3).gameObject.SetActive(true);
 					yield return new WaitForSeconds(0.5f);
-					if(par > 75) scoreUI.transform.GetChild(4).gameObject.SetActive(true);
+					if(par > 85) scoreUI.transform.GetChild(4).gameObject.SetActive(true);
 					yield return new WaitForSeconds(0.5f);
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
 				}
