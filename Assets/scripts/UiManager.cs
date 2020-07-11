@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-	private GameObject slotParent;
+	[SerializeField] private GameObject slotParent;
 	[SerializeField] private GameObject ingredientSlot;
 	[SerializeField] private ingredient[] ingredientList;
-
-	private GameObject recipeBoard;
-	private TMPro.TextMeshProUGUI recipeCount;
+	[SerializeField] private GameObject recipeBoard;
+	[SerializeField] private TMPro.TextMeshProUGUI recipeCount;
+	[SerializeField] private GameObject scoreBoard;
 
 	public List<recipe> recipeList;
 	public recipe currentRecipe; 
@@ -24,9 +24,6 @@ public class UiManager : MonoBehaviour
 	void Start()
 	{
 		eventSystem= Camera.main.GetComponent<eventSystem>();
-		slotParent= GameObject.Find("slotParent");
-		recipeBoard= GameObject.Find("recipeBoard");
-		recipeCount= GameObject.Find("recipeCount").GetComponent<TMPro.TextMeshProUGUI>();
 
 		if(recipeList.Count == 0)
 		{
@@ -39,13 +36,15 @@ public class UiManager : MonoBehaviour
 		
 		currentRecipe= recipeList[currentRecipeIndex];
 		resetRecipeBoard();
+		//showScoreBoard();
 	}
 
 	private void resetRecipeBoard()
 	{
-		Vector2 rectPos= recipeBoard.transform.position;
+		RectTransform recipeBoardRect= recipeBoard.GetComponent<RectTransform>();
+		float rectPos= recipeBoard.transform.position.x;
 
-		LeanTween.moveX(recipeBoard, rectPos.x - 100, .5f).setOnComplete(() => {
+		LeanTween.moveX(recipeBoardRect, -recipeBoardRect.rect.width, .5f).setOnComplete(() => {
 			foreach(Transform slot in slotParent.transform)
 			{
 				Destroy(slot.gameObject);
@@ -64,8 +63,8 @@ public class UiManager : MonoBehaviour
 
 				slot.GetComponent<Alias>().alias= rec.ingredientName;
 			}
-			recipeCount.text= currentRecipeIndex + 1 + " / " + recipeList.Count;
-			LeanTween.moveX(recipeBoard, rectPos.x, .5f).setOnComplete(() => {
+			recipeCount.text= currentRecipeIndex + 1 + "/" + recipeList.Count;
+			LeanTween.moveX(recipeBoardRect, -rectPos, .5f).setOnComplete(() => {
 				if(eventSystem.onRecipeChange != null) eventSystem.callOnRecipeChange();
 				if(eventSystem.onRecipeReady != null && recipeReady == false)
 				{
@@ -128,7 +127,7 @@ public class UiManager : MonoBehaviour
 							}
 							else
 							{
-								LeanTween.moveX(recipeBoard, recipeBoard.transform.position.x - 100, .5f).setOnComplete(() => {
+								LeanTween.moveX(recipeBoard.GetComponent<RectTransform>(), -recipeBoard.GetComponent<RectTransform>().rect.width * 2f, .5f).setOnComplete(() => {
 									if(eventSystem.onRecipeListEmpty != null)
 									{
 										eventSystem.callOnRecipeListEmpty();
@@ -156,11 +155,8 @@ public class UiManager : MonoBehaviour
 	public void showScoreBoard()
 	{
 		GameObject.Find("avatar").SetActive(false);
-		GameObject scoreBoard= GameObject.Find("scoreBoard");
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
-
-		scoreUI.SetActive(true);
 
 		TMPro.TextMeshProUGUI acc= GameObject.Find("recipeAccuracy").GetComponent<TMPro.TextMeshProUGUI>();
 		if(acc != null)
@@ -181,20 +177,41 @@ public class UiManager : MonoBehaviour
 
 				IEnumerator scoreTicker()
 				{	
+					bool flag1= false, flag2= false, flag3= false;
+
 					for(int i= 0; i < Mathf.Floor(par); i++)
 					{
 						acc.text= i + "%";
+
+						if(i > 25 && flag1 == false)
+						{
+							Transform star1= scoreUI.transform.GetChild(2);
+							star1.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
+							star1.GetChild(0).gameObject.SetActive(true);
+							flag1= true;
+						}
+						if(i > 50 && flag2 == false) 
+						{
+							Transform star2= scoreUI.transform.GetChild(3);
+							star2.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
+							star2.GetChild(0).gameObject.SetActive(true);
+							flag2= true;
+						}
+						if(i > 85 && flag3 == false) 
+						{
+							Transform star3= scoreUI.transform.GetChild(4);
+							star3.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
+							star3.GetChild(0).gameObject.SetActive(true);
+							flag3= true;
+						}
+
 						yield return new WaitForSeconds(0.005f);
 					}
 					acc.text= par + "%";
-					
-					if(par > 25) scoreUI.transform.GetChild(2).gameObject.SetActive(true);
-					yield return new WaitForSeconds(0.5f);
-					if(par > 50) scoreUI.transform.GetChild(3).gameObject.SetActive(true);
-					yield return new WaitForSeconds(0.5f);
-					if(par > 85) scoreUI.transform.GetChild(4).gameObject.SetActive(true);
-					yield return new WaitForSeconds(0.5f);
+
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
+					if(par > 25) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
+					else scoreUI.transform.GetChild(1).position= new Vector3(0, scoreUI.transform.GetChild(1).position.y, 0);
 				}
 				StartCoroutine(scoreTicker());
 			});

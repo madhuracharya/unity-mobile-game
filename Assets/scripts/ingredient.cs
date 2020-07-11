@@ -52,9 +52,12 @@ public class ingredient : MonoBehaviour
 		sl1.transform.SetParent(animationCanvas.transform, false);
 		sl2.transform.SetParent(animationCanvas.transform, false);
 
-		Vector3 pos= Camera.main.WorldToScreenPoint(gameObject.transform.position);
+		/*Vector3 pos= Camera.main.WorldToScreenPoint(gameObject.transform.position);
 		sl1.transform.position= pos;
-		sl2.transform.position= pos;
+		sl2.transform.position= pos;*/
+
+		sl1.transform.position= transform.position;
+		sl2.transform.position= transform.position;
 
 		ingredientSlices is1= sl1.GetComponent<ingredientSlices>();
 		ingredientSlices is2= sl2.GetComponent<ingredientSlices>();
@@ -66,7 +69,7 @@ public class ingredient : MonoBehaviour
 				if(is1 != null)
 				{
 					is1.ingredientName= gameObject.GetComponent<Alias>().alias;
-					is1.lookAt= child;
+					is1.lookAt= child.GetComponent<RectTransform>();
 					is1.alias= "sliceBack";
 					Image img= is1.GetComponent<Image>();
 					img.sprite= sliceFrontImage;
@@ -76,7 +79,7 @@ public class ingredient : MonoBehaviour
 				if(is2 != null)
 				{
 					is2.ingredientName= gameObject.GetComponent<Alias>().alias;
-					is2.lookAt= child;
+					is2.lookAt= child.GetComponent<RectTransform>();
 					is2.alias= "sliceFront";
 					Image img= is2.GetComponent<Image>();
 					img.sprite= sliceBackImage;

@@ -8,7 +8,7 @@ public class ingredientSlices : MonoBehaviour
 	public Transform lookAt;
 	private UiManager ui;
 	public string ingredientName;
-	private float duration= .4f;
+	private float duration= 0.4f;
 
 	void Start()
 	{
@@ -31,15 +31,15 @@ public class ingredientSlices : MonoBehaviour
 		{
 			if(alias == "sliceFront")
 			{
-				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration) .setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
-				LeanTween.moveY(gameObject, transform.position.y + 25, duration).setEase(LeanTweenType.easeInQuad);
-				LeanTween.moveX(gameObject, transform.position.x - 40, duration).setEase(LeanTweenType.easeInBack);
+				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration).setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
+				LeanTween.moveY(gameObject, transform.position.y + 2, duration).setEase(LeanTweenType.easeInQuad);
+				LeanTween.moveX(gameObject, transform.position.x - 3, duration).setEase(LeanTweenType.easeInBack);
 			}
 			else
 			{
-				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration) .setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
-				LeanTween.moveY(gameObject, transform.position.y - 25, duration).setEase(LeanTweenType.easeInQuad);
-				LeanTween.moveX(gameObject, transform.position.x + 40, duration).setEase(LeanTweenType.easeInBack);
+				LeanTween.alpha(gameObject.GetComponent<RectTransform>(), 0f, duration).setEase(LeanTweenType.easeInCirc).setOnComplete(harakiri);
+				LeanTween.moveY(gameObject, transform.position.y - 2, duration).setEase(LeanTweenType.easeInQuad);
+				LeanTween.moveX(gameObject, transform.position.x + 3, duration).setEase(LeanTweenType.easeInBack);
 			}
 			ui.incrementInvalidIngredientCount();
 		}
