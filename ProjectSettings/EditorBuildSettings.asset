@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_3.unity
     guid: 5054b5f5b7b68467e9dd4f18a5c0a44b
+  - enabled: 1
+    path: Assets/Scenes/game_complete.unity
+    guid: c33f31dfc050e40e28aec2efb352ff09
+  - enabled: 0
+    path: Assets/Scenes/transition test .unity
+    guid: 2e8d88eb1d78045aea68fa3fbb86f79a
+  - enabled: 0
+    path: Assets/Scenes/transition_test_out.unity
+    guid: 21e72e39316b747f0b174202ac402c51
   m_configObjects: {}

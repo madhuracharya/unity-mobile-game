@@ -5,6 +5,7 @@ using UnityEngine;
 public class patternRotate : MonoBehaviour
 {
 	private bool delayComplete= false;
+	public float speed= 30f;
 
 	void Start()
 	{
@@ -15,7 +16,7 @@ public class patternRotate : MonoBehaviour
 	{
 		if(delayComplete == true)
 		{
-			transform.Rotate(0, 0, 30f * Time.deltaTime);
+			transform.Rotate(0, 0, speed * Time.deltaTime);
 		}
 	}
 

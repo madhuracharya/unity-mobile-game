@@ -14,8 +14,7 @@ public class tutorialManager : MonoBehaviour
 	[SerializeField] private GameObject text1;
 	[SerializeField] private GameObject text2;
 	[SerializeField] private GameObject text3;
-	[SerializeField] private GameObject mask1;
-	[SerializeField] private GameObject mask2;
+	[SerializeField] private GameObject mask;
 	[SerializeField] private GameObject OK;
 	[SerializeField] private Transform slotParent;
 
@@ -35,8 +34,7 @@ public class tutorialManager : MonoBehaviour
 			{
 				helpingHand.SetActive(false);
 				text1.SetActive(false);
-				mask1.SetActive(false);
-				mask2.SetActive(true);
+				mask.SetActive(true);
 				text2.SetActive(true);
 				OK.SetActive(true);
 				stage2= true;
@@ -48,7 +46,6 @@ public class tutorialManager : MonoBehaviour
 			yield return new WaitForSeconds(1f);
 			backDrop.SetActive(true);
 			helpingHand.SetActive(true);
-			mask1.SetActive(true);
 			LeanTween.move(helpingHand, ing1.transform.position, 1.5f).setOnComplete(() => {
 				text1.SetActive(true);
 			});
@@ -63,7 +60,7 @@ public class tutorialManager : MonoBehaviour
 		{
 			focus= true;
 			finalStage= true;
-			mask2.SetActive(true);
+			mask.SetActive(true);
 			text3.SetActive(true);
 			OK.SetActive(true);
 			backDrop.SetActive(true);
@@ -100,7 +97,7 @@ public class tutorialManager : MonoBehaviour
 
 		focus= false;
 		text2.SetActive(false);
-		mask2.SetActive(false);
+		mask.SetActive(false);
 		backDrop.SetActive(false);
 		OK.SetActive(false);
 	}

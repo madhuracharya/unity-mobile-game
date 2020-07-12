@@ -183,14 +183,14 @@ public class UiManager : MonoBehaviour
 					{
 						acc.text= i + "%";
 
-						if(i > 25 && flag1 == false)
+						if(i > 50 && flag1 == false)
 						{
 							Transform star1= scoreUI.transform.GetChild(2);
 							star1.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star1.GetChild(0).gameObject.SetActive(true);
 							flag1= true;
 						}
-						if(i > 50 && flag2 == false) 
+						if(i > 66 && flag2 == false) 
 						{
 							Transform star2= scoreUI.transform.GetChild(3);
 							star2.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
