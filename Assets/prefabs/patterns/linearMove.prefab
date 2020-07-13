@@ -65,6 +65,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
         type: 3}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: ingList
+      value: 
+      objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
+        type: 2}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -146,6 +152,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
         type: 3}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: ingList
+      value: 
+      objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
+        type: 2}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -227,6 +239,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
         type: 3}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: ingList
+      value: 
+      objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
+        type: 2}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,6 +326,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
         type: 3}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: ingList
+      value: 
+      objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
+        type: 2}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x

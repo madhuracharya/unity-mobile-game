@@ -9,6 +9,7 @@ public class ingredient : MonoBehaviour
 	private float speed= 3f;
 	private float revSpeed;
 	private GameObject canvas;
+	private Alias alias;
 	[SerializeField] private GameObject explosion;
 	[SerializeField] private GameObject sliceBack;
 	[SerializeField] private GameObject sliceFront;
@@ -22,6 +23,7 @@ public class ingredient : MonoBehaviour
 	{
 		rb= GetComponent<Rigidbody2D>();
 		canvas= GameObject.Find("Canvas");
+		alias= gameObject.GetComponent<Alias>();
 		revSpeed= Random.Range(-50.0f, 50f);
 		//eventSystem= Camera.main.GetComponent<eventSystem>();
 	}
@@ -31,7 +33,7 @@ public class ingredient : MonoBehaviour
 		transform.Rotate(0, 0, revSpeed * Time.deltaTime);
 	}
 
-	Dictionary<string, Color[]> getColors()
+/*	Dictionary<string, Color[]> getColors()
 	{
 		Dictionary<string, Color[]> IngredientColors = new Dictionary<string, Color[]>();
 		IngredientColors["greenApple"]= new Color[]{new Color(0.8f, 0.8f, 0.8f, 1f), new Color(0.5576454f, 1f, 0f, 1f)};
@@ -40,7 +42,7 @@ public class ingredient : MonoBehaviour
 		IngredientColors["pineapple"]= new Color[]{new Color(1f, 0.8873908f, 0f, 1f), new Color(0.7608987f, 1f, 0f, 1f)};
 
 		return IngredientColors;
-	}
+	}*/
 
 	public void renderSlices()
 	{
@@ -64,11 +66,11 @@ public class ingredient : MonoBehaviour
 
 		foreach (Transform child in slotParent.transform)
 		{
-			if(child.GetComponent<Alias>().alias == gameObject.GetComponent<Alias>().alias && child.GetChild(2).gameObject.activeSelf == false)
+			if(child.GetComponent<Alias>().alias == alias.alias && child.GetChild(2).gameObject.activeSelf == false)
 			{
 				if(is1 != null)
 				{
-					is1.ingredientName= gameObject.GetComponent<Alias>().alias;
+					is1.ingredientName= alias.alias;
 					is1.lookAt= child.GetComponent<RectTransform>();
 					is1.alias= "sliceBack";
 					Image img= is1.GetComponent<Image>();
@@ -78,7 +80,7 @@ public class ingredient : MonoBehaviour
 
 				if(is2 != null)
 				{
-					is2.ingredientName= gameObject.GetComponent<Alias>().alias;
+					is2.ingredientName= alias.alias;
 					is2.lookAt= child.GetComponent<RectTransform>();
 					is2.alias= "sliceFront";
 					Image img= is2.GetComponent<Image>();
@@ -92,7 +94,7 @@ public class ingredient : MonoBehaviour
 
 		if(is1 != null)
 		{
-			is1.ingredientName= gameObject.GetComponent<Alias>().alias;
+			is1.ingredientName= alias.alias;
 			is1.alias= "sliceBack";
 			Image img= is1.GetComponent<Image>();
 			img.sprite= sliceFrontImage;
@@ -101,7 +103,7 @@ public class ingredient : MonoBehaviour
 
 		if(is2 != null)
 		{
-			is2.ingredientName= gameObject.GetComponent<Alias>().alias;
+			is2.ingredientName= alias.alias;
 			is2.alias= "sliceFront";
 			Image img= is2.GetComponent<Image>();
 			img.sprite= sliceBackImage;
@@ -116,10 +118,11 @@ public class ingredient : MonoBehaviour
 		void breakIngredient()
 		{
 			GameObject exp= Instantiate(explosion, transform.position, transform.rotation);		
-			if(getColors().ContainsKey(gameObject.name.Replace("(Clone)", "")))
+			
+			if(alias.splatterColor.Length > 0)
 			{
 				ParticleSystem.MainModule exMain= exp.GetComponent<ParticleSystem>().main;
-				Color[] col= getColors()[(string)gameObject.name.Replace("(Clone)", "")];
+				Color[] col= alias.splatterColor;
 				exMain.startColor= new ParticleSystem.MinMaxGradient(col[0], col[1]);
 			}
 

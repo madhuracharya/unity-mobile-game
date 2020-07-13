@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Level_2
   m_EditorClassIdentifier: 
   theRecipe:
-  - ingredient: {fileID: 2663395995113632350, guid: 2308c4cf430314ce88de95f6e4601818,
+  - ingredient: {fileID: 7836205047577574321, guid: 8bd7ab8527ec9437ba6cd6aff3610696,
       type: 3}
     quantity: 1
-    ingredientName: greenApple
-  - ingredient: {fileID: 4903290819011546592, guid: 3b50575c7efde4424a5f914552af451b,
+    ingredientName: blueberry
+  - ingredient: {fileID: 6006376129872425015, guid: dd826f8ccbf194752bc7812a10f5a9fd,
       type: 3}
     quantity: 2
-    ingredientName: orange
-  - ingredient: {fileID: 6092282720374784339, guid: a4ea94a661f904a5a97b5fff36a36193,
+    ingredientName: potato
+  - ingredient: {fileID: 6038021338461551296, guid: 9c4dbb691f13d44efa26351737503d6d,
       type: 3}
     quantity: 2
-    ingredientName: pineapple
-  - ingredient: {fileID: 4934660061602201626, guid: d7f21c1f959ef4f739f1acb9591e2f16,
+    ingredientName: strawberry
+  - ingredient: {fileID: 6744312794593959904, guid: 9e5bdf8c2ea9c4e8999c92a1a0fdb8a9,
       type: 3}
     quantity: 2
-    ingredientName: redApple
+    ingredientName: pumkin

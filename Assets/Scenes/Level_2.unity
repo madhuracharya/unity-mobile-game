@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &965144433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,11 +642,7 @@ MonoBehaviour:
   slotParent: {fileID: 1984705240}
   ingredientSlot: {fileID: 3588685580785759995, guid: 6e0db18940f4f4ff9a35f4cacb1c4389,
     type: 3}
-  ingredientList:
-  - {fileID: 2663395995113632349, guid: 2308c4cf430314ce88de95f6e4601818, type: 3}
-  - {fileID: 4903290819011546595, guid: 3b50575c7efde4424a5f914552af451b, type: 3}
-  - {fileID: 6092282720374784336, guid: a4ea94a661f904a5a97b5fff36a36193, type: 3}
-  - {fileID: 4934660061602201625, guid: d7f21c1f959ef4f739f1acb9591e2f16, type: 3}
+  ingList: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf, type: 2}
   recipeBoard: {fileID: 1075184935}
   recipeCount: {fileID: 1306433485}
   scoreBoard: {fileID: 340727801}
@@ -814,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1805390079
 Transform:
   m_ObjectHideFlags: 0

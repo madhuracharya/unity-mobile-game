@@ -6,4 +6,5 @@ public class Alias : MonoBehaviour
 {
 	public string alias;
 	public bool inRecipe;
+	public Color[] splatterColor;
 }

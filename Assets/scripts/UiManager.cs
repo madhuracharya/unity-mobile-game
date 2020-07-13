@@ -7,7 +7,7 @@ public class UiManager : MonoBehaviour
 {
 	[SerializeField] private GameObject slotParent;
 	[SerializeField] private GameObject ingredientSlot;
-	[SerializeField] private ingredient[] ingredientList;
+	[SerializeField] private IngredientList ingList;
 	[SerializeField] private GameObject recipeBoard;
 	[SerializeField] private TMPro.TextMeshProUGUI recipeCount;
 	[SerializeField] private GameObject scoreBoard;
@@ -19,11 +19,13 @@ public class UiManager : MonoBehaviour
 	private bool recipeReady= false;
 	public int invalidIngredientCount= 0;
 	public int totalIngredients= 0;
+	private ingredient[] ingredientList;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		eventSystem= Camera.main.GetComponent<eventSystem>();
+		if(ingList != null) ingredientList= ingList.ingredientList;
 
 		if(recipeList.Count == 0)
 		{
@@ -157,6 +159,7 @@ public class UiManager : MonoBehaviour
 		GameObject.Find("avatar").SetActive(false);
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
+		float treshold= 50;
 
 		TMPro.TextMeshProUGUI acc= GameObject.Find("recipeAccuracy").GetComponent<TMPro.TextMeshProUGUI>();
 		if(acc != null)
@@ -183,7 +186,7 @@ public class UiManager : MonoBehaviour
 					{
 						acc.text= i + "%";
 
-						if(i > 50 && flag1 == false)
+						if(i > treshold && flag1 == false)
 						{
 							Transform star1= scoreUI.transform.GetChild(2);
 							star1.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
@@ -210,7 +213,7 @@ public class UiManager : MonoBehaviour
 					acc.text= par + "%";
 
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
-					if(par > 25) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
+					if(par > treshold) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
 					else scoreUI.transform.GetChild(1).position= new Vector3(0, scoreUI.transform.GetChild(1).position.y, 0);
 				}
 				StartCoroutine(scoreTicker());
@@ -250,7 +253,7 @@ public class UiManager : MonoBehaviour
 		{
 			if(slot.GetChild(2).gameObject.activeSelf == false)
 			{
-				int indx= System.Array.FindIndex(ingredientList,  ig => ig.GetComponent<Alias>().alias == slot.GetComponent<Alias>().alias);
+				int indx= System.Array.FindIndex(ingredientList,  ig => ig != null ? ig.GetComponent<Alias>().alias == slot.GetComponent<Alias>().alias : false);
 				if(indx > -1)
 				{
 					ingList.Add(ingredientList[indx]);

@@ -6,15 +6,14 @@ public class spawnPoint : MonoBehaviour
 {
 	[SerializeField] private IngredientList ingList;
 	private UiManager uiManager;
-	public bool spawnFromRecipe= false;
 
 	void Start()
 	{
 		uiManager= GameObject.Find("Canvas").GetComponent<UiManager>();
+		List<recipeItem> therecipe= uiManager.currentRecipe.theRecipe;
 
-		if(spawnFromRecipe == true)
+		if(Random.value <= 0.5)
 		{
-			List<recipeItem> therecipe= uiManager.currentRecipe.theRecipe;
 			int rand= Random.Range(0,  therecipe.Count * 3);
 			rand= rand % therecipe.Count;
 			GameObject ing= Instantiate(therecipe[rand].ingredient, transform.position, transform.rotation);

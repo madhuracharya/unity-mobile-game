@@ -156,6 +156,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alias: greenApple
+  inRecipe: 0
+  splatterColor:
+  - {r: 0.15402181, g: 1, b: 0.07075471, a: 1}
+  - {r: 0.8088023, g: 0.9716981, b: 0.6921057, a: 1}
 --- !u!1001 &7923307618430878734
 PrefabInstance:
   m_ObjectHideFlags: 0

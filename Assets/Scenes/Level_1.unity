@@ -517,7 +517,7 @@ Transform:
   m_LocalScale: {x: 1.8291402, y: 1.8291402, z: 1.8291402}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &822796264 stripped
 RectTransform:
@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &965144433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,11 +642,7 @@ MonoBehaviour:
   slotParent: {fileID: 1984705240}
   ingredientSlot: {fileID: 3588685580785759995, guid: 6e0db18940f4f4ff9a35f4cacb1c4389,
     type: 3}
-  ingredientList:
-  - {fileID: 2663395995113632349, guid: 2308c4cf430314ce88de95f6e4601818, type: 3}
-  - {fileID: 4903290819011546595, guid: 3b50575c7efde4424a5f914552af451b, type: 3}
-  - {fileID: 6092282720374784336, guid: a4ea94a661f904a5a97b5fff36a36193, type: 3}
-  - {fileID: 4934660061602201625, guid: d7f21c1f959ef4f739f1acb9591e2f16, type: 3}
+  ingList: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf, type: 2}
   recipeBoard: {fileID: 1075184935}
   recipeCount: {fileID: 1306433485}
   scoreBoard: {fileID: 340727801}
@@ -814,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1805390079
 Transform:
   m_ObjectHideFlags: 0
@@ -842,9 +838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPatternList:
+  - {fileID: 8268181928628064597, guid: dd667b7c77a7d489c9806f0c5bbe84bb, type: 3}
   - {fileID: 2600030839307845216, guid: f0f266b52b8e846f0a09ca71675fc08a, type: 3}
   - {fileID: 5991856896430315906, guid: 1d53a03c8f289499988d9518be08613e, type: 3}
-  - {fileID: 8268181928628064597, guid: dd667b7c77a7d489c9806f0c5bbe84bb, type: 3}
 --- !u!1 &1984705240 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5631835114788961723, guid: 7b8abe22e2d034f799551f7562749289,
@@ -862,6 +858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: secne_transition
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118707596322962176, guid: f041e0f9f468b42a4aa8fa286c954f54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8118707596322962180, guid: f041e0f9f468b42a4aa8fa286c954f54,
         type: 3}
@@ -906,7 +907,7 @@ PrefabInstance:
     - target: {fileID: 8118707596322962187, guid: f041e0f9f468b42a4aa8fa286c954f54,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8118707596322962187, guid: f041e0f9f468b42a4aa8fa286c954f54,
         type: 3}
