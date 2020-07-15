@@ -35,6 +35,12 @@ public class sceneManager : MonoBehaviour
 		Debug.Log("Loading next scene!");
 		StartCoroutine(waitForTransition(SceneManager.GetActiveScene().buildIndex + 1));
 	}
+
+	public void loadLevel(int sceneIndx)
+	{
+		StartCoroutine(waitForTransition(sceneIndx + 3));
+	}
+
 	public void restartScene()
 	{
 		Debug.Log("restarting currentt scene!");

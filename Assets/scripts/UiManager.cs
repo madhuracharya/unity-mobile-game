@@ -20,10 +20,13 @@ public class UiManager : MonoBehaviour
 	public int invalidIngredientCount= 0;
 	public int totalIngredients= 0;
 	private ingredient[] ingredientList;
+	public profile player;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		player= loadData();
+
 		eventSystem= Camera.main.GetComponent<eventSystem>();
 		if(ingList != null) ingredientList= ingList.ingredientList;
 
@@ -156,10 +159,13 @@ public class UiManager : MonoBehaviour
 
 	public void showScoreBoard()
 	{
+
 		GameObject.Find("avatar").SetActive(false);
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
-		float treshold= 50;
+		float treshold1= 50;
+		float treshold2= 66;
+		float treshold3= 85;
 
 		TMPro.TextMeshProUGUI acc= GameObject.Find("recipeAccuracy").GetComponent<TMPro.TextMeshProUGUI>();
 		if(acc != null)
@@ -186,21 +192,21 @@ public class UiManager : MonoBehaviour
 					{
 						acc.text= i + "%";
 
-						if(i > treshold && flag1 == false)
+						if(i > treshold1 && flag1 == false)
 						{
 							Transform star1= scoreUI.transform.GetChild(2);
 							star1.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star1.GetChild(0).gameObject.SetActive(true);
 							flag1= true;
 						}
-						if(i > 66 && flag2 == false) 
+						if(i > treshold2 && flag2 == false) 
 						{
 							Transform star2= scoreUI.transform.GetChild(3);
 							star2.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star2.GetChild(0).gameObject.SetActive(true);
 							flag2= true;
 						}
-						if(i > 85 && flag3 == false) 
+						if(i > treshold3 && flag3 == false) 
 						{
 							Transform star3= scoreUI.transform.GetChild(4);
 							star3.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
@@ -213,8 +219,12 @@ public class UiManager : MonoBehaviour
 					acc.text= par + "%";
 
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
-					if(par > treshold) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
+					if(par > treshold1) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
 					else scoreUI.transform.GetChild(1).position= new Vector3(0, scoreUI.transform.GetChild(1).position.y, 0);
+				
+					player.updateLevel(player.currentlevel, par);
+					player.setCurrentLevel(player.currentlevel + 1);
+					saveData();
 				}
 				StartCoroutine(scoreTicker());
 			});
@@ -261,6 +271,26 @@ public class UiManager : MonoBehaviour
 			}
 		}
 		return ingList;
+	}
+
+	public void saveData()
+	{
+		saveSystem.Save(player);
+	}
+
+	public profile loadData()
+	{
+		profile prof= saveSystem.Load();
+		if(prof != null)
+		{
+			Debug.Log("Player data Loaded!"); 
+			return prof;
+		}
+		else
+		{
+			Debug.Log("failed to load profile data");  
+			return new profile();
+		}
 	}
 }
 
