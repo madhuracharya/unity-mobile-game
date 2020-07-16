@@ -652,6 +652,60 @@ MonoBehaviour:
   currentRecipeIndex: 0
   invalidIngredientCount: 0
   totalIngredients: 0
+  player:
+    levelData:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    currentlevel: 0
+  levelNmber: 1
 --- !u!1 &1075184935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5631835114020997700, guid: 7b8abe22e2d034f799551f7562749289,

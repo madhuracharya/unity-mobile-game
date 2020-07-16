@@ -14,7 +14,7 @@ public class levelSelector : MonoBehaviour
 	private int padding= 20;
 	private Rect actualButtonDimentions;
 	public profile player;
-
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -31,6 +31,25 @@ public class levelSelector : MonoBehaviour
 		Debug.Log("Total pages: " + totalPages + ", levels per page: " + levelsPerPage);
 
 		createPages(totalPages, levelsPerPage, pannelDimentions, buttonDimentions);
+
+		int currentIndex= 0;
+		float previousScore= 100;
+
+		foreach(Transform page in levelContainer.transform)
+		{
+			foreach(Transform itm in page)
+			{
+				if(previousScore >= 50)
+				{
+					itm.GetChild(1).gameObject.SetActive(true);
+					itm.GetChild(2).gameObject.SetActive(true);
+					itm.GetChild(3).gameObject.SetActive(true);
+					itm.GetComponent<Button>().interactable= true;
+					previousScore= itm.GetComponent<Alias>().score;
+				}
+				currentIndex++;
+			}
+		}
 	}
 
 	void createPages(int totalPages, int levelsPerPage, Rect pannelDimentions, Rect buttonDimentions)
@@ -55,6 +74,7 @@ public class levelSelector : MonoBehaviour
 
 			loadButtons(levelnumb, pannel);
 		}
+
 		Destroy(pannelClone);
 	}
 
@@ -97,6 +117,8 @@ public class levelSelector : MonoBehaviour
 			star2.gameObject.SetActive(true);
 			star3.gameObject.SetActive(true);
 			levelUI.transform.GetChild(4).gameObject.SetActive(false);
+			levelUI.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>().text= score + "%";
+			levelUI.GetComponent<Alias>().score= score;
 
 			star1.color = new Color(0.7f,0.4f,0f,1f);
 

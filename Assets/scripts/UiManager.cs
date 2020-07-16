@@ -21,6 +21,7 @@ public class UiManager : MonoBehaviour
 	public int totalIngredients= 0;
 	private ingredient[] ingredientList;
 	public profile player;
+	public int levelNmber;
 
 	// Start is called before the first frame update
 	void Start()
@@ -222,8 +223,8 @@ public class UiManager : MonoBehaviour
 					if(par > treshold1) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
 					else scoreUI.transform.GetChild(1).position= new Vector3(0, scoreUI.transform.GetChild(1).position.y, 0);
 				
-					player.updateLevel(player.currentlevel, par);
-					player.setCurrentLevel(player.currentlevel + 1);
+					player.updateLevel(levelNmber, par);
+					player.setCurrentLevel(levelNmber + 1);
 					saveData();
 				}
 				StartCoroutine(scoreTicker());

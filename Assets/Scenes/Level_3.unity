@@ -777,12 +777,65 @@ MonoBehaviour:
   recipeCount: {fileID: 1306433485}
   scoreBoard: {fileID: 340727801}
   recipeList:
-  - {fileID: 11400000, guid: a4d25e6b02f5543ef9b5be2bf4f787bc, type: 2}
-  - {fileID: 11400000, guid: ede20f873d21b4f2cbd23635b6ed26d7, type: 2}
+  - {fileID: 11400000, guid: 732be9848e50c470491f5ab2dd2305e1, type: 2}
   currentRecipe: {fileID: 0}
   currentRecipeIndex: 0
   invalidIngredientCount: 0
   totalIngredients: 0
+  player:
+    levelData:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    currentlevel: 0
+  levelNmber: 2
 --- !u!1 &1075184935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5631835114020997700, guid: 7b8abe22e2d034f799551f7562749289,

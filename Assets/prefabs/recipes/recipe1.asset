@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0587d13be0fbb4d36a7eee5e912efb24, type: 3}
+  m_Name: recipe1
+  m_EditorClassIdentifier: 
+  theRecipe:
+  - ingredient: {fileID: 7836205047577574321, guid: 8bd7ab8527ec9437ba6cd6aff3610696,
+      type: 3}
+    quantity: 1
+    ingredientName: blueberry
+  - ingredient: {fileID: 6006376129872425015, guid: dd826f8ccbf194752bc7812a10f5a9fd,
+      type: 3}
+    quantity: 2
+    ingredientName: potato
+  - ingredient: {fileID: 6038021338461551296, guid: 9c4dbb691f13d44efa26351737503d6d,
+      type: 3}
+    quantity: 2
+    ingredientName: strawberry
+  - ingredient: {fileID: 6744312794593959904, guid: 9e5bdf8c2ea9c4e8999c92a1a0fdb8a9,
+      type: 3}
+    quantity: 2
+    ingredientName: pumkin
+  - ingredient: {fileID: 9195476649654598882, guid: 482e79ade2fcb4869b3b56ebb0b876d3,
+      type: 3}
+    quantity: 2
+    ingredientName: grape
