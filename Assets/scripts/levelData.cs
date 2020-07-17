@@ -8,10 +8,13 @@ public class ingredientPrimitives
 	public string ingredient;
 	public int quantity;
 
-	public ingredientPrimitives()
+	public ingredientPrimitives(ingredient[] ingList)
 	{
-		this.ingredient= "orange";
-		this.quantity= 2;
+		int rand= Random.Range(0,  ingList.Length * 3);
+		rand= rand % ingList.Length;
+
+		this.ingredient= ingList[rand].GetComponent<Alias>().alias;
+		this.quantity= Random.Range(1,  5);
 	}
 }
 
@@ -20,12 +23,15 @@ public class recipePrimitive
 {
 	public List<ingredientPrimitives> recipe;
 
-	public recipePrimitive()
+	public recipePrimitive(ingredient[] ingList)
 	{
-		this.recipe= new List<ingredientPrimitives> {
-			new ingredientPrimitives(),
-			new ingredientPrimitives()
-		};
+		int count= Random.Range(1,  5);
+
+		this.recipe= new List<ingredientPrimitives>();
+		for(int i= 0; i < count; i++)
+		{
+			this.recipe.Add(new ingredientPrimitives(ingList));
+		}
 	}
 }
 
@@ -34,12 +40,15 @@ public class levelPrimitive
 {
 	public List<recipePrimitive> level;
 
-	public levelPrimitive()
+	public levelPrimitive(ingredient[] ingList)
 	{
-		this.level= new List<recipePrimitive> {
-			new recipePrimitive(),
-			new recipePrimitive()
-		};
+		int count= Random.Range(1,  5);
+
+		this.level= new List<recipePrimitive>();
+		for(int i= 0; i < count; i++)
+		{
+			this.level.Add(new recipePrimitive(ingList));
+		}
 	}
 }
 
@@ -48,40 +57,11 @@ public class levelData
 {
 	public List<levelPrimitive> levels= new List<levelPrimitive>();
 
-	public levelData()
+	public levelData(ingredient[] ingList, int numbOfLevels)
 	{
-		this.levels= new List<levelPrimitive> {
-			new levelPrimitive(),
-			new levelPrimitive()
-		};
+		for(int i= 0; i < numbOfLevels; i++)
+		{
+			this.levels.Add(new levelPrimitive(ingList));
+		}
 	}
 }
-
-
-/*[System.Serializable]
-public class levelData
-{
-	public List<List<List<ingredientPrimitives>>> levels= new List<List<List<ingredientPrimitives>>>();
-
-	public levelData()
-	{
-		List<ingredientPrimitives> recipe= new List<ingredientPrimitives>{
-			new ingredientPrimitives(),
-			new ingredientPrimitives()
-		};
-
-		List<List<ingredientPrimitives>> level= new List<List<ingredientPrimitives>>{
-			recipe,
-			recipe
-		};
-
-		this.levels.Add(level);
-		this.levels.Add(level);
-	}
-}*/
-
-/*[System.Serializable]
-public class levelData
-{
-	public List<ingredientPrimitives> levels;
-}*/

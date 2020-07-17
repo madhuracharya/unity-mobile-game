@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class testScript : MonoBehaviour
 {
+	[SerializeField] private IngredientList ingList;
+	public List<recipe> theRecipe;
 	public levelData lvlData;
 
 	public void testSave()
 	{
-		lvlData= new levelData();
+		lvlData= new levelData(ingList.ingredientList, 10);
 
 		JSONManager.SaveIntoJson(lvlData);
 	}
@@ -20,30 +22,12 @@ public class testScript : MonoBehaviour
 		{
 			Debug.Log("loaded level data");  
 			lvlData= prof;
+
+			theRecipe= JSONManager.getLevelDate(ingList.ingredientList, prof, 2);
 		}
 		else
 		{
 			Debug.Log("failed to load level data");  
 		}
 	}
-
-
-	/*[SerializeField] private GameObject ingTest;
-	public int count;
-
-	// Start is called before the first frame update
-	void Start()
-	{
-		StartCoroutine(SpawnIngredient());
-	}
-
-	public IEnumerator SpawnIngredient()
-	{
-		for(int i= 0; i <= count; i++)
-		{
-			yield return new WaitForSeconds(2);
-			GameObject ing= Instantiate(ingTest, transform.position, transform.rotation);
-			if(ing) Destroy(ing, 5);
-		}
-	}*/
 }

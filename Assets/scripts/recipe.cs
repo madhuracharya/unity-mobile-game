@@ -18,6 +18,8 @@ public class recipe : ScriptableObject
 
 	public recipe(ingredient[] ingredientList)
 	{
+		if(ingredientList.Length == 0) return;
+
 		List<int> sampleSpace= new List<int>();
 		for(int i= 0; i < ingredientList.Length; i++)
 		{
