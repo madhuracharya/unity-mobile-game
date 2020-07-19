@@ -7,6 +7,7 @@ public class levelSelector : MonoBehaviour
 {
 	[SerializeField] private GameObject levelContainer;
 	[SerializeField] private GameObject levelButton;
+	[SerializeField] private Transform swiper;
 
 	public int totalLevels= 50;
 	private int levelCount;
@@ -34,7 +35,7 @@ public class levelSelector : MonoBehaviour
 		int currentIndex= 0;
 		float previousScore= 100;
 
-		foreach(Transform page in levelContainer.transform)
+		foreach(Transform page in transform.GetChild(3))
 		{
 			foreach(Transform itm in page)
 			{
@@ -49,6 +50,7 @@ public class levelSelector : MonoBehaviour
 				currentIndex++;
 			}
 		}
+		Destroy(levelContainer);
 	}
 
 	void createPages(int totalPages, int levelsPerPage, Rect pannelDimentions, Rect buttonDimentions)
@@ -59,7 +61,8 @@ public class levelSelector : MonoBehaviour
 		{
 			GameObject pannel= Instantiate(pannelClone) as GameObject;
 			pannel.transform.SetParent(transform, false);
-			pannel.transform.SetParent(levelContainer.transform);
+			pannel.transform.SetParent(swiper);
+			//pannel.transform.SetParent(levelContainer.transform);
 			pannel.name= "Page_" + i;
 			
 			GridLayoutGroup grid= pannel.AddComponent<GridLayoutGroup>();
@@ -89,7 +92,6 @@ public class levelSelector : MonoBehaviour
 			level.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text= "Level " + (levelCount + 1);
 			level.GetComponent<Button>().onClick.AddListener( () => {
 				sceneManager sceneManager= Camera.main.GetComponent<sceneManager>();
-				Debug.Log("Button " + buttonLvl + " clicked!");
 				sceneManager.loadLevel(buttonLvl);
 			});
 
