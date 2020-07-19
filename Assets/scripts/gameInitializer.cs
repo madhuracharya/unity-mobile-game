@@ -9,15 +9,15 @@ public class gameInitializer : MonoBehaviour
 
 	void Start()
 	{
-		/*if(PlayerPrefs.GetInt("firstTime") == 0)
+		if(PlayerPrefs.GetInt("firstTime") == 0)
 		{
 			JSONManager.SaveIntoJson(new levelData(ingList.ingredientList, numbOfLevels));
 			saveSystem.Save(new profile(numbOfLevels));
 			PlayerPrefs.SetInt("firstTime", 1);
-		}*/
+		}
 
-		JSONManager.SaveIntoJson(new levelData(ingList.ingredientList, numbOfLevels));
+		/*JSONManager.SaveIntoJson(new levelData(ingList.ingredientList, numbOfLevels));
 		saveSystem.Save(new profile(numbOfLevels));
-		PlayerPrefs.SetInt("firstTime", 1);
+		PlayerPrefs.SetInt("firstTime", 1);*/
 	}
 }

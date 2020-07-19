@@ -82,7 +82,7 @@ public class tutorialManager : MonoBehaviour
 			else if(ingOrange == null && invalidIng == null && (ing2 == null && ing3 == null) && text3 == null)
 			{
 				LeanTween.moveY(scoreBoard.GetComponent<RectTransform>(), 0f, .5f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
-					
+					PlayerPrefs.SetInt("tutorialComplete", 1);
 				});
 			}
 			else if(ingOrange == null && invalidIng == null && (ing2 == null && ing3 == null) && text3 != null) 
@@ -99,7 +99,7 @@ public class tutorialManager : MonoBehaviour
 					Destroy(mask);
 					Destroy(OK);
 					LeanTween.moveY(scoreBoard.GetComponent<RectTransform>(), 0f, .5f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
-						
+						PlayerPrefs.SetInt("tutorialComplete", 1);	
 					});
 				});
 			}
@@ -128,17 +128,6 @@ public class tutorialManager : MonoBehaviour
 				updateRecipeBoard("pineapple");
 			}
 		};
-
-		/*IEnumerator waitfor1second()
-		{	
-			yield return new WaitForSeconds(1f);
-			backDrop.SetActive(true);
-			helpingHand.SetActive(true);
-			LeanTween.move(helpingHand, ingOrange.transform.position, .5f).setOnComplete(() => {
-				text1.SetActive(true);
-			});
-		}
-		StartCoroutine(waitfor1second());*/
 	}
 
 	void Update()

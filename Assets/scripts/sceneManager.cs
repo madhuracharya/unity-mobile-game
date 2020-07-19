@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class sceneManager : MonoBehaviour
 {
-	private int levelSceneIndex= 3;
-	private int levelSelectorScene= 2;
 	public Animator animator;
 	public List<GameObject> objectsList;
 
@@ -25,48 +23,53 @@ public class sceneManager : MonoBehaviour
 		StartCoroutine(waitForOneSecond());
 	}
 
-	IEnumerator waitForTransition(int sceneIndex)
+	IEnumerator waitForTransition(string sceneName)
 	{
 		animator.SetTrigger("transition_start");
 		yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene(sceneIndex);
+		if(sceneName == "Self") SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		else SceneManager.LoadScene(sceneName);
 	}
 
-	public void nextScene()
+	public void play()
 	{
-		Debug.Log("Loading next scene!");
-		StartCoroutine(waitForTransition(SceneManager.GetActiveScene().buildIndex + 1));
+		if(PlayerPrefs.GetInt("tutorialComplete") == 0)
+			StartCoroutine(waitForTransition("Tutorial"));
+		else
+		{
+			StartCoroutine(waitForTransition("gameLevel"));
+		}
 	}
 
 	public void openLevelSelector()
 	{
 		Debug.Log("Loading Level Selector!");
-		StartCoroutine(waitForTransition(levelSelectorScene));
+		StartCoroutine(waitForTransition("level_selector"));
+	}
+
+	public void openTitleScreen()
+	{
+		Debug.Log("Loading title screen");
+		StartCoroutine(waitForTransition("StartScreen"));
 	}
 
 	public void nextLevel()
 	{
 		Debug.Log("Loading next level!");
-		PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel") + 1);
-		StartCoroutine(waitForTransition(levelSceneIndex));
+		StartCoroutine(waitForTransition("gameLevel"));
 	}
 
 	public void loadLevel(int level)
 	{
 		Debug.Log("Loading level: " + (level + 1));
 		PlayerPrefs.SetInt("currentLevel", level);
-		StartCoroutine(waitForTransition(levelSceneIndex));
-	}
-
-	public void loadScene(int sceneIndx)
-	{
-		StartCoroutine(waitForTransition(sceneIndx + 3));
+		StartCoroutine(waitForTransition("gameLevel"));
 	}
 
 	public void restartScene()
 	{
 		Debug.Log("restarting currentt scene!");
-		StartCoroutine(waitForTransition(SceneManager.GetActiveScene().buildIndex));
+		StartCoroutine(waitForTransition("Self"));
 	}
 
 	public void saveJSON(ingredient[] ingList, int numbOfLevels)

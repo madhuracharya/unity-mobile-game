@@ -165,7 +165,6 @@ public class UiManager : MonoBehaviour
 
 	public void showScoreBoard()
 	{
-
 		GameObject.Find("avatar").SetActive(false);
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
@@ -225,7 +224,11 @@ public class UiManager : MonoBehaviour
 					acc.text= par + "%";
 
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
-					if(par > treshold1) scoreUI.transform.GetChild(5).gameObject.GetComponent<Button>().interactable= true;
+					if(par > treshold1) 
+					{
+						scoreUI.transform.GetChild(5).gameObject.GetComponent<Button>().interactable= true;
+						PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel") + 1);
+					}
 					else scoreUI.transform.GetChild(5).gameObject.GetComponent<Button>().interactable= false;
 					scoreUI.transform.GetChild(1).gameObject.GetComponent<Button>().interactable= true;
 					scoreUI.transform.GetChild(6).gameObject.GetComponent<Button>().interactable= true;
