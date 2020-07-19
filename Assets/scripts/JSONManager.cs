@@ -10,6 +10,12 @@ public static class JSONManager
 	public static void SaveIntoJson(levelData levelData)
 	{
 		string data = JsonUtility.ToJson(levelData);
+
+		if(!Directory.Exists(Application.persistentDataPath + "/SND"))
+		{
+			Directory.CreateDirectory(Application.persistentDataPath + "/SND");
+		}
+
 		File.WriteAllText(path, data);
 		Debug.Log("Data saved!");
 	}
@@ -20,7 +26,7 @@ public static class JSONManager
 		return data;
 	}
 
-	public static List<recipe> getLevelDate(ingredient[] ingList, levelData levelData, int currentLevel)
+	public static List<recipe> getLevelData(ingredient[] ingList, levelData levelData, int currentLevel)
 	{
 		List<levelPrimitive> levels= levelData.levels;
 
@@ -39,6 +45,7 @@ public static class JSONManager
 					{
 						recipeItem obj= new recipeItem();
 						int indx= System.Array.FindIndex(ingList, x => x.GetComponent<Alias>().alias == ing.ingredient);
+
 						if(indx > -1)
 						{
 							obj.ingredient= ingList[indx].gameObject;
@@ -73,6 +80,8 @@ public static class JSONManager
 		{
 			return new List<recipe>();
 		}
-		
 	}	
 }
+
+
+

@@ -289,7 +289,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -305,26 +304,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b87f6230d67cd4142a571c82f09b7c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelContainer: {fileID: 1993243109}
-  levelButton: {fileID: 3508158501124903431, guid: c30a32f019b174bb7975d59fd04032bf,
-    type: 3}
-  canvas: {fileID: 965144432}
-  totalLevels: 50
-  player:
-    levelData: []
-    currentlevel: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -490,6 +469,7 @@ GameObject:
   - component: {fileID: 965144435}
   - component: {fileID: 965144434}
   - component: {fileID: 965144433}
+  - component: {fileID: 965144437}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -578,6 +558,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &965144437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965144432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87f6230d67cd4142a571c82f09b7c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelContainer: {fileID: 1993243109}
+  levelButton: {fileID: 3508158501124903431, guid: c30a32f019b174bb7975d59fd04032bf,
+    type: 3}
+  totalLevels: 50
+  player:
+    levelData:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    currentlevel: 0
 --- !u!95 &1358124907 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8118707596955977860, guid: f041e0f9f468b42a4aa8fa286c954f54,

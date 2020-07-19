@@ -10,7 +10,6 @@ public static class saveSystem
 
 	public static bool Save(profile saveData)
 	{
-		Debug.Log(saveData.currentlevel);
 		BinaryFormatter formatter= getBinaryFormatter();
 
 		if(!Directory.Exists(Application.persistentDataPath + "/SND"))

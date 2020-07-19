@@ -8,12 +8,9 @@ public class ingredientPrimitives
 	public string ingredient;
 	public int quantity;
 
-	public ingredientPrimitives(ingredient[] ingList)
+	public ingredientPrimitives(ingredient ing)
 	{
-		int rand= Random.Range(0,  ingList.Length * 3);
-		rand= rand % ingList.Length;
-
-		this.ingredient= ingList[rand].GetComponent<Alias>().alias;
+		this.ingredient= ing.GetComponent<Alias>().alias;
 		this.quantity= Random.Range(1,  5);
 	}
 }
@@ -26,12 +23,26 @@ public class recipePrimitive
 	public recipePrimitive(ingredient[] ingList)
 	{
 		int count= Random.Range(1,  5);
+		ingredient[] tempIngList= new ingredient[ingList.Length];
+		System.Array.Copy(ingList, tempIngList, ingList.Length); 
 
 		this.recipe= new List<ingredientPrimitives>();
 		for(int i= 0; i < count; i++)
-		{
-			this.recipe.Add(new ingredientPrimitives(ingList));
+		{	
+			int rand= Random.Range(0,  tempIngList.Length * 3);
+			rand= rand % tempIngList.Length;
+			this.recipe.Add(new ingredientPrimitives(tempIngList[rand]));
+			RemoveAt(ref tempIngList, rand);
 		}
+	}
+
+	void RemoveAt(ref ingredient[] arr, int index)
+	{
+		for (int a = index; a < arr.Length - 1; a++)
+		{
+			arr[a] = arr[a + 1];
+		}
+		System.Array.Resize(ref arr, arr.Length - 1);
 	}
 }
 
@@ -57,7 +68,7 @@ public class levelData
 {
 	public List<levelPrimitive> levels= new List<levelPrimitive>();
 
-	public levelData(ingredient[] ingList, int numbOfLevels)
+	public levelData(ingredient[] ingList, int numbOfLevels= 100)
 	{
 		for(int i= 0; i < numbOfLevels; i++)
 		{

@@ -27,6 +27,10 @@ public class UiManager : MonoBehaviour
 	void Start()
 	{
 		player= loadData();
+		levelNmber= PlayerPrefs.GetInt("currentLevel");
+
+		List<recipe> tmpList= Camera.main.GetComponent<sceneManager>().loadJSON(ingList.ingredientList, levelNmber);
+		if(tmpList.Count > 0) recipeList= tmpList;
 
 		eventSystem= Camera.main.GetComponent<eventSystem>();
 		if(ingList != null) ingredientList= ingList.ingredientList;
@@ -72,6 +76,7 @@ public class UiManager : MonoBehaviour
 			recipeCount.text= currentRecipeIndex + 1 + "/" + recipeList.Count;
 			LeanTween.moveX(recipeBoardRect, -rectPos, .5f).setOnComplete(() => {
 				if(eventSystem.onRecipeChange != null) eventSystem.callOnRecipeChange();
+
 				if(eventSystem.onRecipeReady != null && recipeReady == false)
 				{
 					eventSystem.callOnRecipeReady();
@@ -220,10 +225,13 @@ public class UiManager : MonoBehaviour
 					acc.text= par + "%";
 
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);
-					if(par > treshold1) scoreUI.transform.GetChild(5).gameObject.SetActive(true);
-					else scoreUI.transform.GetChild(1).position= new Vector3(0, scoreUI.transform.GetChild(1).position.y, 0);
-				
-					player.updateLevel(levelNmber, par);
+					if(par > treshold1) scoreUI.transform.GetChild(5).gameObject.GetComponent<Button>().interactable= true;
+					else scoreUI.transform.GetChild(5).gameObject.GetComponent<Button>().interactable= false;
+					scoreUI.transform.GetChild(1).gameObject.GetComponent<Button>().interactable= true;
+					scoreUI.transform.GetChild(6).gameObject.GetComponent<Button>().interactable= true;
+
+					if(player.levelData[levelNmber] < par)
+						player.updateLevel(levelNmber, par);
 					player.setCurrentLevel(levelNmber + 1);
 					saveData();
 				}

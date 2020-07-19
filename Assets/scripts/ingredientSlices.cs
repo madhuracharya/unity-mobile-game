@@ -41,9 +41,9 @@ public class ingredientSlices : MonoBehaviour
 				LeanTween.moveY(gameObject, transform.position.y - 2, duration).setEase(LeanTweenType.easeInQuad);
 				LeanTween.moveX(gameObject, transform.position.x + 3, duration).setEase(LeanTweenType.easeInBack);
 			}
-			ui.incrementInvalidIngredientCount();
+			if(ui != null) ui.incrementInvalidIngredientCount();
 		}
-		ui.incrementTotalIngredients();
+		if(ui != null) ui.incrementTotalIngredients();
 
 		if(gameObject != null) Destroy(gameObject, 2);
 	}
@@ -59,7 +59,7 @@ public class ingredientSlices : MonoBehaviour
 		if(gameObject != null) Destroy(gameObject);
 		if(ingredientName != null) 
 		{
-			ui.updateRecipeBoard(ingredientName);
+			if(ui != null) ui.updateRecipeBoard(ingredientName);
 			//Destroy(ingredient);
 		}
 	}

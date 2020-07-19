@@ -144,6 +144,8 @@ public class ingredient : MonoBehaviour
 		if(other.tag == "blade")
 		{
 			breakIngredient();
+			eventSystem evt= Camera.main.GetComponent<eventSystem>();
+			if(evt.onIngredientTrigger != null) evt.callOnIngredientTrigger();
 		}
 	}
 }

@@ -8,12 +8,12 @@ public class profile
 	public List<float> levelData;
 	public int currentlevel; 
 
-	public profile()
+	public profile(int numberOfLevels= 100)
 	{
 		this.currentlevel= 0;
 		this.levelData= new List<float>();
 
-		for(int i= 0; i < 50; i++)
+		for(int i= 0; i < numberOfLevels; i++)
 		{
 			levelData.Add(0f);
 		}

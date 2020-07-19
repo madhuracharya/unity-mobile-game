@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -494,6 +495,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12beb93e1bcf442b7bd0c7dd8faa5fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingList: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf, type: 2}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1430,11 +1444,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: secne_transition
       objectReference: {fileID: 0}
-    - target: {fileID: 8118707596322962180, guid: f041e0f9f468b42a4aa8fa286c954f54,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 519420031}
     - target: {fileID: 8118707596322962187, guid: f041e0f9f468b42a4aa8fa286c954f54,
         type: 3}
       propertyPath: m_LocalPosition.x

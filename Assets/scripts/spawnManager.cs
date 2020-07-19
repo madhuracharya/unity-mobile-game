@@ -27,7 +27,6 @@ public class spawnManager : MonoBehaviour
 	{
 		//recipeList= UiManager != null ? UiManager.recipeList : new List<recipe>();
 		List<ingredient> actList= UiManager != null ? UiManager.getActiveIngredients() : new List<ingredient>();
-		
 		if(actList.Count > 0)
 		{
 			int rand= Random.Range(0,  spawnPatternList.Count * 3);

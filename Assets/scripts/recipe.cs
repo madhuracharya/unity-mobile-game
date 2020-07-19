@@ -33,23 +33,6 @@ public class recipe : ScriptableObject
 			rand= rand % sampleSpace.Count;
 			int indx= sampleSpace[rand];
 
-			/*if(theRecipe.FindIndex( x => x.ingredientName == ingredientList[indx].GetComponent<Alias>().alias) != -1)
-			{
-				for(int j= 0; j < ingredientList.Length; j++)
-				{
-					if(theRecipe.FindIndex( x => x.ingredientName == ingredientList[j].GetComponent<Alias>().alias) == -1)
-					{
-						indx= j;
-						break;
-					}
-				}
-			}*/
-			
-			/*while(theRecipe.FindIndex( x => x.ingredientName == ingredientList[indx].GetComponent<Alias>().alias) != -1)
-			{
-				indx= (indx + 1) % (ingredientList.Length - 1);
-			}*/
-
 			ingredient ing= ingredientList[indx];
 			string alias= ing.GetComponent<Alias>().alias;
 			itm.ingredient= ing.gameObject;

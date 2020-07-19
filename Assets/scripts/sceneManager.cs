@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class sceneManager : MonoBehaviour
 {
+	private int levelSceneIndex= 3;
+	private int levelSelectorScene= 2;
 	public Animator animator;
 	public List<GameObject> objectsList;
 
@@ -36,7 +38,27 @@ public class sceneManager : MonoBehaviour
 		StartCoroutine(waitForTransition(SceneManager.GetActiveScene().buildIndex + 1));
 	}
 
-	public void loadLevel(int sceneIndx)
+	public void openLevelSelector()
+	{
+		Debug.Log("Loading Level Selector!");
+		StartCoroutine(waitForTransition(levelSelectorScene));
+	}
+
+	public void nextLevel()
+	{
+		Debug.Log("Loading next level!");
+		PlayerPrefs.SetInt("currentLevel", PlayerPrefs.GetInt("currentLevel") + 1);
+		StartCoroutine(waitForTransition(levelSceneIndex));
+	}
+
+	public void loadLevel(int level)
+	{
+		Debug.Log("Loading level: " + (level + 1));
+		PlayerPrefs.SetInt("currentLevel", level);
+		StartCoroutine(waitForTransition(levelSceneIndex));
+	}
+
+	public void loadScene(int sceneIndx)
 	{
 		StartCoroutine(waitForTransition(sceneIndx + 3));
 	}
@@ -45,5 +67,24 @@ public class sceneManager : MonoBehaviour
 	{
 		Debug.Log("restarting currentt scene!");
 		StartCoroutine(waitForTransition(SceneManager.GetActiveScene().buildIndex));
+	}
+
+	public void saveJSON(ingredient[] ingList, int numbOfLevels)
+	{
+		JSONManager.SaveIntoJson(new levelData(ingList, numbOfLevels));
+	}
+
+	public List<recipe> loadJSON(ingredient[] ingList, int levelNmber)
+	{
+		levelData prof= JSONManager.LoadFromJson();
+		if(prof != null)
+		{
+			return JSONManager.getLevelData(ingList, prof, levelNmber);
+		}
+		else
+		{
+			Debug.Log("failed to load level data");  
+			return new List<recipe>();
+		}
 	}
 }

@@ -7,14 +7,13 @@ public class levelSelector : MonoBehaviour
 {
 	[SerializeField] private GameObject levelContainer;
 	[SerializeField] private GameObject levelButton;
-	[SerializeField] private GameObject canvas;
 
 	public int totalLevels= 50;
 	private int levelCount;
 	private int padding= 20;
 	private Rect actualButtonDimentions;
 	public profile player;
-	
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -59,7 +58,7 @@ public class levelSelector : MonoBehaviour
 		for(int i= 0; i < totalPages; i++)
 		{
 			GameObject pannel= Instantiate(pannelClone) as GameObject;
-			pannel.transform.SetParent(canvas.transform, false);
+			pannel.transform.SetParent(transform, false);
 			pannel.transform.SetParent(levelContainer.transform);
 			pannel.name= "Page_" + i;
 			
@@ -84,7 +83,7 @@ public class levelSelector : MonoBehaviour
 		{
 			int buttonLvl= levelCount;
 			GameObject level= Instantiate(levelButton) as GameObject;
-			level.transform.SetParent(canvas.transform, false);
+			level.transform.SetParent(transform, false);
 			level.transform.SetParent(parent.transform);
 			level.name= "Level_" + levelCount;
 			level.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text= "Level " + (levelCount + 1);
