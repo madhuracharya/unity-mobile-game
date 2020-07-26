@@ -6,64 +6,47 @@ using UnityEngine.EventSystems;
 public class pageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
 {
 	private Vector3 panelLocation;
-	private float threshold= 0.2f;
-	private int totalPages= 0;
-	private int currentPage= 0;
-
+	private Transform firstChild;
+	private Transform lastChild;
+	private float firstChildOffset;
+        
 	void Start()
 	{
 		panelLocation= transform.position;
 		IEnumerator getChildren()
 		{	
 			yield return null;
-			totalPages= transform.childCount - 1;
+			firstChild= transform.GetChild(0);
+			lastChild= transform.GetChild(transform.childCount - 1);
+
+			firstChildOffset= firstChild.position.x;
 		}
 		StartCoroutine(getChildren());
 	}
 
 	public void OnDrag(PointerEventData data)
 	{
-		float difference= Camera.main.ScreenToWorldPoint(new Vector2(data.pressPosition.x, 0)).x - Camera.main.ScreenToWorldPoint(new Vector2(data.position.x, 0)).x; 
+		//float difference= data.pressPosition.x - data.position.x;
+		Camera camera= Camera.main;
+		float difference= camera.ScreenToWorldPoint(data.pressPosition).x - camera.ScreenToWorldPoint(data.position).x;
 		transform.position= panelLocation - new Vector3(difference, 0, 0);
 	}
 
 	public void OnEndDrag(PointerEventData data)
 	{
-		float percentage= (data.pressPosition.x - data.position.x) / Screen.width;
-		float nudge= Camera.main.ScreenToWorldPoint(new Vector2(transform.GetChild(0).GetComponent<RectTransform>().rect.width, 0)).x / 2;
-
-		if(Mathf.Abs(percentage) > threshold)
+		if((firstChild.position.x - firstChildOffset) > 0 || (lastChild.position.x - firstChildOffset) < 0)
 		{
-			Vector3 newLocation= panelLocation;
-			if(percentage < 0)
-			{
-				if(currentPage <= 0)
-				{
-					LeanTween.moveX(transform.gameObject, panelLocation.x, 0.3f);
-					return;
-				}
-				newLocation= panelLocation + new Vector3(nudge, 0, 0);
-				currentPage--;
-			}
-			else if(percentage > 0)
-			{
-				if(currentPage >= totalPages)
-				{
-					LeanTween.moveX(transform.gameObject, panelLocation.x, 0.3f);
-					return;
-				}
-				newLocation= panelLocation - new Vector3(nudge, 0, 0);
-				currentPage++;
-			}
-
-			LeanTween.moveX(transform.gameObject, newLocation.x, 0.3f).setOnComplete(() => {
-				panelLocation= newLocation;
-			});			
+			LeanTween.moveX(gameObject, panelLocation.x, 0.3f).setOnComplete(() => {
+				panelLocation= transform.position;
+			});
 		}
 		else
 		{
-			LeanTween.moveX(transform.gameObject, panelLocation.x, 0.3f);
+			panelLocation= transform.position;
 		}
 	}
 
 }
+
+
+

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d716ce31b0254958ba3322a98b6fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnAnimation: {fileID: 7756862994322582996, guid: 965412dda4a704a0f910d66fd872972e,
+    type: 3}
 --- !u!1001 &8268181927618951924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,6 +73,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
         type: 2}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: probability
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,6 +165,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
         type: 2}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: probability
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -245,6 +257,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
         type: 2}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: probability
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -332,6 +349,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
         type: 2}
+    - target: {fileID: 8191842368878797346, guid: a521315513849441cb9ebedfdc198f79,
+        type: 3}
+      propertyPath: probability
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8191842368878797347, guid: a521315513849441cb9ebedfdc198f79,
         type: 3}
       propertyPath: m_LocalPosition.x

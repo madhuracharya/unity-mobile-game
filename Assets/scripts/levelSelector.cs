@@ -15,9 +15,13 @@ public class levelSelector : MonoBehaviour
 	private Rect actualButtonDimentions;
 	public profile player;
 
-	// Start is called before the first frame update
 	void Start()
 	{
+		Camera camera = Camera.main;
+
+		float camHeight = camera.orthographicSize * 2f;
+		float camWidth = camera.aspect * camHeight;
+
 		player= loadData();
 
 		Rect pannelDimentions= levelContainer.GetComponent<RectTransform>().rect;
@@ -35,7 +39,7 @@ public class levelSelector : MonoBehaviour
 		int currentIndex= 0;
 		float previousScore= 100;
 
-		foreach(Transform page in transform.GetChild(3))
+		foreach(Transform page in transform.GetChild(0))
 		{
 			foreach(Transform itm in page)
 			{

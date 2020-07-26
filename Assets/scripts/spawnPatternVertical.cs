@@ -6,6 +6,7 @@ public class spawnPatternVertical : MonoBehaviour
 {
 	//[SerializeField] private GameObject[] ingredients;
 	[SerializeField] private IngredientList ingList;
+	[SerializeField] private float probability;
 	private ingredient[] ingredientList;
 	private UiManager uiManager;
 	private List<recipeItem> therecipe;
@@ -23,6 +24,9 @@ public class spawnPatternVertical : MonoBehaviour
 
 		if(ingList != null) ingredientList= ingList.ingredientList;
 		StartCoroutine(SpawnIngredients());
+
+		if(probability == 0)
+			probability= 0.3f;
 	}
 
 	// Update is called once per frame
@@ -52,7 +56,7 @@ public class spawnPatternVertical : MonoBehaviour
 			float delay= Random.Range(minDelay, maxDelay);
 			yield return new WaitForSeconds(delay);
 
-			if(Random.value <= 0.3)
+			if(Random.value <= probability)
 			{
 				int rand= Random.Range(0,  therecipe.Count * 3);
 				rand= rand % therecipe.Count;

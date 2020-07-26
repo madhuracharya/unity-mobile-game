@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class patternManager : MonoBehaviour
 {
+	[SerializeField] private GameObject despawnAnimation;
+
 	private spawnManager spawner;
 	private string name;
 	private GameObject slotParent;
@@ -13,11 +15,18 @@ public class patternManager : MonoBehaviour
 	void Start()
 	{
 		UiManager= GameObject.Find("Canvas").GetComponent<UiManager>();
-		spawner= GameObject.Find("spawnManager").GetComponent<spawnManager>();
+		GameObject sp= GameObject.Find("spawnManager");
+		spawner= sp != null ? sp.GetComponent<spawnManager>() : null;
 		slotParent = GameObject.Find("slotParent");
 		name= gameObject.name.Replace("(Clone)", "");
-		//Camera.main.GetComponent<eventSystem>().onIngredientTrigger+= validateIngredients;
 		Camera.main.GetComponent<eventSystem>().onRecipeBoardUpdate+= validateIngredients;
+
+		IEnumerator delay()
+		{	
+			yield return new WaitForSeconds(1f);
+			validateIngredients();
+		}
+		StartCoroutine(delay());
 	}
 
 	void Update()
@@ -26,6 +35,19 @@ public class patternManager : MonoBehaviour
 		{
 			next();
 		}
+	}
+
+	public void despawnAndDestroy()
+	{
+		if(despawnAnimation == null) return;
+		Camera cam= Camera.main;
+		foreach(Transform child in transform)
+		{
+			GameObject temp= Instantiate(despawnAnimation, child.position, child.rotation);
+			temp.transform.SetParent(cam.transform);
+			Destroy(temp, 1);
+		}
+		Destroy(gameObject);
 	}
 
 	private void validateIngredients()
@@ -68,8 +90,9 @@ public class patternManager : MonoBehaviour
 		IEnumerator despawn()
 		{	
 			yield return new WaitForSeconds(1f);
-			spawner.spawnNewPattern();
-			Destroy(gameObject);
+			if(spawner != null)
+				spawner.spawnNewPattern();
+			despawnAndDestroy();
 		}
 
 		Debug.Log("Spawning next!");

@@ -44,7 +44,7 @@ public class sceneManager : MonoBehaviour
 	public void openLevelSelector()
 	{
 		Debug.Log("Loading Level Selector!");
-		StartCoroutine(waitForTransition("level_selector"));
+		StartCoroutine(waitForTransition("levelSelector"));
 	}
 
 	public void openTitleScreen()

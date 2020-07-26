@@ -10,7 +10,8 @@ public class spawnManager : MonoBehaviour
 
 	void Start()
 	{
-		UiManager= GameObject.Find("Canvas") != null ? GameObject.Find("Canvas").GetComponent<UiManager>() : null;
+		GameObject canvas= GameObject.Find("Canvas");
+		UiManager= canvas != null ? canvas.GetComponent<UiManager>() : null;
 		Camera.main.GetComponent<eventSystem>().onRecipeReady+= spawnNewPattern;
 		//spawnNewPattern();
 	}
