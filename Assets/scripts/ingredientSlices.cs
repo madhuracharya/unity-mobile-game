@@ -9,10 +9,12 @@ public class ingredientSlices : MonoBehaviour
 	private UiManager ui;
 	public string ingredientName;
 	private float duration= 0.4f;
+	private soundManager sound;
 
 	void Start()
 	{
 		ui= GameObject.Find("Canvas").GetComponent<UiManager>();
+		sound= Camera.main.GetComponent<soundManager>();
 
 		if(lookAt != null)
 		{
@@ -60,6 +62,7 @@ public class ingredientSlices : MonoBehaviour
 		if(ingredientName != null) 
 		{
 			if(ui != null) ui.updateRecipeBoard(ingredientName);
+			if(sound != null) sound.playIngredientCollectSound();
 			//Destroy(ingredient);
 		}
 	}

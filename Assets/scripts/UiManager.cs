@@ -21,6 +21,7 @@ public class UiManager : MonoBehaviour
 	public int totalIngredients= 0;
 	private ingredient[] ingredientList;
 	public profile player;
+	private soundManager sound;
 	public int levelNmber;
 
 	// Start is called before the first frame update
@@ -30,9 +31,11 @@ public class UiManager : MonoBehaviour
 		levelNmber= PlayerPrefs.GetInt("currentLevel");
 
 		List<recipe> tmpList= Camera.main.GetComponent<sceneManager>().loadJSON(ingList.ingredientList, levelNmber);
-		if(tmpList.Count > 0) recipeList= tmpList;
+		if(tmpList.Count > 0 && recipeList.Count == 0) recipeList= tmpList;
 
 		eventSystem= Camera.main.GetComponent<eventSystem>();
+		sound= Camera.main.GetComponent<soundManager>();
+
 		if(ingList != null) ingredientList= ingList.ingredientList;
 
 		if(recipeList.Count == 0)
@@ -135,6 +138,8 @@ public class UiManager : MonoBehaviour
 								currentRecipe= recipeList[currentRecipeIndex];
 								//recipeList.RemoveAt(0);  
 								resetRecipeBoard();
+
+								if(sound != null) sound.playRecipeCompleteSound();
 							}
 							else
 							{
@@ -165,7 +170,7 @@ public class UiManager : MonoBehaviour
 
 	public void showScoreBoard()
 	{
-		GameObject.Find("avatar").SetActive(false);
+		GameObject.Find("knifeControler").SetActive(false);
 		GameObject scoreUI= scoreBoard.transform.GetChild(1).gameObject;
 		GameObject backdrop= scoreBoard.transform.GetChild(0).gameObject;
 		float treshold1= 50;
