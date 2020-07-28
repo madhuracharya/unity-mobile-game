@@ -5,7 +5,7 @@ using UnityEngine;
 public class patternRotate : MonoBehaviour
 {
 	private bool delayComplete= false;
-	public float speed= 30f;
+	public float speed;
 
 	void Start()
 	{
