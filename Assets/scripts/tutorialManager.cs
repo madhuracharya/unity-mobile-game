@@ -32,10 +32,13 @@ public class tutorialManager : MonoBehaviour
 	private bool focus= true;
 	private int stage= 0;
 	private bool objectsReady= false;
+	private soundManager sound;
 
 	void Start()
 	{
 		eventSystem= Camera.main.GetComponent<eventSystem>();
+		sound= Camera.main.GetComponent<soundManager>();
+
 		resetRecipeBoard();
 		eventSystem.onRecipeReady+= () => {
 			if(objectsReady == true) return;
@@ -81,8 +84,10 @@ public class tutorialManager : MonoBehaviour
 			}
 			else if(ingOrange == null && invalidIng == null && (ing2 == null && ing3 == null) && text3 == null)
 			{
+				if(sound != null) sound.playRecipeCompleteSound();
 				LeanTween.moveY(scoreBoard.GetComponent<RectTransform>(), 0f, .5f).setEase(LeanTweenType.easeOutQuad).setOnComplete(() => {
 					PlayerPrefs.SetInt("tutorialComplete", 1);
+					if(sound != null) sound.playStar3Sound();
 				});
 			}
 			else if(ingOrange == null && invalidIng == null && (ing2 == null && ing3 == null) && text3 != null) 

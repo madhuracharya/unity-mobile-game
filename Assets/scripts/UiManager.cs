@@ -148,6 +148,7 @@ public class UiManager : MonoBehaviour
 									{
 										eventSystem.callOnRecipeListEmpty();
 									}
+									if(sound != null) sound.playLevelCompleteSound();
 									showScoreBoard();
 								});
 							}
@@ -198,6 +199,8 @@ public class UiManager : MonoBehaviour
 				{	
 					bool flag1= false, flag2= false, flag3= false;
 
+					if(sound != null) sound.startScoreTicker();
+
 					for(int i= 0; i < Mathf.Floor(par); i++)
 					{
 						acc.text= i + "%";
@@ -208,6 +211,7 @@ public class UiManager : MonoBehaviour
 							star1.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star1.GetChild(0).gameObject.SetActive(true);
 							flag1= true;
+							if(sound != null) sound.playStar1Sound();
 						}
 						if(i > treshold2 && flag2 == false) 
 						{
@@ -215,6 +219,7 @@ public class UiManager : MonoBehaviour
 							star2.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star2.GetChild(0).gameObject.SetActive(true);
 							flag2= true;
+							if(sound != null) sound.playStar2Sound();
 						}
 						if(i > treshold3 && flag3 == false) 
 						{
@@ -222,10 +227,13 @@ public class UiManager : MonoBehaviour
 							star3.GetComponent<Image>().color = new Color(0.99f,0.52f,0f,1f);
 							star3.GetChild(0).gameObject.SetActive(true);
 							flag3= true;
+							if(sound != null) sound.playStar3Sound();
 						}
 
 						yield return new WaitForSeconds(0.005f);
 					}
+					if(sound != null) sound.stopScoreTicker();
+
 					acc.text= par + "%";
 
 					scoreUI.transform.GetChild(1).gameObject.SetActive(true);

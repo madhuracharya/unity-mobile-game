@@ -944,6 +944,12 @@ MonoBehaviour:
   ingredientCollectSound: {fileID: 8300000, guid: f571585edb45e40759f3fdc0161bb7c1,
     type: 3}
   recipeCompleteSound: {fileID: 8300000, guid: 7c56b065c14524ead8a2c1307e82e9a5, type: 3}
+  levelCompleteSound: {fileID: 8300000, guid: 6030ee003dacd445a9631ab0f67f493e, type: 3}
+  star1Sound: {fileID: 8300000, guid: b797019b55af046cfb5b0ea228dbdc67, type: 3}
+  star2Sound: {fileID: 8300000, guid: 0c49c6f9811994b909cf5ac3ca610b01, type: 3}
+  star3Sound: {fileID: 8300000, guid: 739a472fb685c4a6fb3849730ee44cd3, type: 3}
+  UIButtonClick: {fileID: 8300000, guid: c2bbc01834c3d43d6bc10a16464297bb, type: 3}
+  scoreTicker: {fileID: 8300000, guid: 3835a403404824ded80cec3aafdfbc7e, type: 3}
 --- !u!82 &519420035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2029,7 +2035,6 @@ MonoBehaviour:
   recipeList:
   - {fileID: 11400000, guid: 15983e586502a4dac8ca223b0869b433, type: 2}
   - {fileID: 11400000, guid: 15983e586502a4dac8ca223b0869b433, type: 2}
-  - {fileID: 11400000, guid: 15983e586502a4dac8ca223b0869b433, type: 2}
   currentRecipe: {fileID: 0}
   currentRecipeIndex: 0
   invalidIngredientCount: 0
@@ -2132,9 +2137,9 @@ PrefabInstance:
       objectReference: {fileID: 519420033}
     - target: {fileID: 3758664030815776208, guid: 162fdfcfb817a479e8c83d402a8c9ab0,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: openLevelSelector
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 965144437}
     - target: {fileID: 3758664030815776220, guid: 162fdfcfb817a479e8c83d402a8c9ab0,
         type: 3}
       propertyPath: m_Name
@@ -2720,9 +2725,9 @@ PrefabInstance:
       objectReference: {fileID: 519420033}
     - target: {fileID: 2233890133455709679, guid: 03b090136147246fdafaf219aa9c961c,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: restartScene
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 965144437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b090136147246fdafaf219aa9c961c, type: 3}
 --- !u!1 &1984705240 stripped
@@ -2988,16 +2993,31 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 1296957399949627860, guid: 860f5e541e6a549eb91373b8d7837f24,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 965144437}
     - target: {fileID: 1296957400578358298, guid: 860f5e541e6a549eb91373b8d7837f24,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 519420033}
+    - target: {fileID: 1296957400578358298, guid: 860f5e541e6a549eb91373b8d7837f24,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 965144437}
+    - target: {fileID: 2548480445632840400, guid: 860f5e541e6a549eb91373b8d7837f24,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 519420033}
     - target: {fileID: 2548480445632840400, guid: 860f5e541e6a549eb91373b8d7837f24,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 519420033}
+      objectReference: {fileID: 965144437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 860f5e541e6a549eb91373b8d7837f24, type: 3}
 --- !u!1001 &4257637242750565918
@@ -3144,7 +3164,7 @@ PrefabInstance:
     - target: {fileID: 5631835114020997707, guid: 7b8abe22e2d034f799551f7562749289,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 28.50003
+      value: 28.5
       objectReference: {fileID: 0}
     - target: {fileID: 5631835114020997707, guid: 7b8abe22e2d034f799551f7562749289,
         type: 3}
