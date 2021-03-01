@@ -6,6 +6,7 @@ using System.IO;
 public static class JSONManager
 {
 	private static string path= Application.persistentDataPath + "/SND/" + "SND.json";
+	private static string dataPath= Application.persistentDataPath + "/SND/" + "SND_save" + ".bin";
 
 	public static void SaveIntoJson(levelData levelData)
 	{
@@ -24,6 +25,20 @@ public static class JSONManager
 	{
 		levelData data = JsonUtility.FromJson<levelData>(File.ReadAllText(path));
 		return data;
+	}
+
+	public static void initialize(ingredient[] ingList)
+	{
+		if(!Directory.Exists(Application.persistentDataPath + "/SND") || !File.Exists(path))
+		{
+			Directory.CreateDirectory(Application.persistentDataPath + "/SND");
+			SaveIntoJson(new levelData(ingList, 100));
+			Debug.Log("Creating Levels");
+		}
+		else
+		{
+			Debug.Log("Game levels found!");
+		}
 	}
 
 	public static List<recipe> getLevelData(ingredient[] ingList, levelData levelData, int currentLevel)

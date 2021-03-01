@@ -5,19 +5,21 @@ using UnityEngine;
 public class gameInitializer : MonoBehaviour
 {
 	[SerializeField] private IngredientList ingList;
-	private int numbOfLevels= 100;
 
 	void Start()
 	{
+		JSONManager.initialize(ingList.ingredientList);
+		saveSystem.initialize();
+
 		if(PlayerPrefs.GetInt("firstTime") == 0)
 		{
-			JSONManager.SaveIntoJson(new levelData(ingList.ingredientList, numbOfLevels));
-			saveSystem.Save(new profile(numbOfLevels));
 			PlayerPrefs.SetInt("firstTime", 1);
 		}
+	}
 
-		/*JSONManager.SaveIntoJson(new levelData(ingList.ingredientList, numbOfLevels));
-		saveSystem.Save(new profile(numbOfLevels));
-		PlayerPrefs.SetInt("firstTime", 1);*/
+	void ResetData()
+	{
+		PlayerPrefs.DeleteAll();
+		Debug.Log("Data reset complete");
 	}
 }

@@ -1719,6 +1719,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3879739165439560320, guid: be21d34e30a6a41798d3c2ebdc16c8c8,
+        type: 3}
+      propertyPath: ingList
+      value: 
+      objectReference: {fileID: 11400000, guid: b27020c916e314f9e9b3032990bb87cf,
+        type: 2}
     - target: {fileID: 7749784825982952515, guid: be21d34e30a6a41798d3c2ebdc16c8c8,
         type: 3}
       propertyPath: m_Name

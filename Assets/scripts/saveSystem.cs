@@ -26,11 +26,25 @@ public static class saveSystem
 		return true;
 	}	
 
+	public static void initialize()
+	{
+		if(!Directory.Exists(Application.persistentDataPath + "/SND") || !File.Exists(path))
+		{
+			Directory.CreateDirectory(Application.persistentDataPath + "/SND");
+			Save(new profile());
+			Debug.Log("Creating Saves!");
+		}
+		else
+		{
+			Debug.Log("Game saves found!");
+		}
+	}
+
 	public static profile Load()
 	{
 		if(!File.Exists(path))
 		{
-			Debug.Log(path + " :Directory doesnt exist");
+			Debug.Log(path + " :File doesnt exist");
 			return null;
 		}
 		else
